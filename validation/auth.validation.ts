@@ -21,3 +21,17 @@ export const signupValidation = z.object({
       }
     ),
 });
+
+export const signinValidation = z.object({
+  email: z.string().email({ message: "Invalid email address" }),
+  password: z
+    .string()
+    .min(6, { message: "Password must be at least 6 characters" })
+    .regex(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/,
+      {
+        message:
+          "Password must include uppercase, lowercase, number, and special character",
+      }
+    ),
+});
