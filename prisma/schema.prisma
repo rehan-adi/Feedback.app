@@ -9,10 +9,10 @@ datasource db {
 
 model User {
   id                  String   @id @default(uuid())
-  username            String   @db.VarChar(50)
+  username            String   @db.VarChar(100)
   email               String   @unique @db.VarChar(255)
-  password            String   @db.VarChar(100)
-  verifyCode          String   @db.VarChar(6)
+  password            String   @db.VarChar(255)
+  verifyCode          String   @db.VarChar(50)
   verifyCodeExpiry    DateTime
   isVerified          Boolean  @default(false)
   isAcceptingMessages Boolean  @default(true)
