@@ -13,13 +13,7 @@ export const signupValidation = z.object({
   password: z
     .string()
     .min(6, { message: "Password must be at least 6 characters" })
-    .regex(
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/,
-      {
-        message:
-          "Password must include uppercase, lowercase, number, and special character",
-      }
-    ),
+    .regex(/.+/, { message: "Password cannot be empty" })
 });
 
 export const signinValidation = z.object({
@@ -27,11 +21,5 @@ export const signinValidation = z.object({
   password: z
     .string()
     .min(6, { message: "Password must be at least 6 characters" })
-    .regex(
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/,
-      {
-        message:
-          "Password must include uppercase, lowercase, number, and special character",
-      }
-    ),
+    .regex(/.+/, { message: "Password cannot be empty" })
 });
