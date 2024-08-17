@@ -1,6 +1,8 @@
 import prisma from "@/lib/prisma";
 import bcrypt from 'bcrypt';
+import { randomBytes } from "crypto";
 import { NextRequest, NextResponse } from "next/server";
+import { sendVerificationEmail } from "@/helper/sendVerificationEmail";
 import { signupValidation } from "@/validation/auth.validation";
 
 export const POST = async (req: NextRequest) => {
@@ -20,14 +22,21 @@ export const POST = async (req: NextRequest) => {
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
+    
+    const verifycode = randomBytes(32).toString('hex');
+    const verifyCodeExpiry = new Date(Date.now() + 1000 * 60 * 60 * 24);
 
     const user = await prisma.user.create({
       data: {
         username,
         email,
         password: hashedPassword,
+        verifycode,
+        verifyCodeExpiry
       },
     });
+
+    await sendVerificationEmail({email, username, verifycode})
 
     return NextResponse.json({ success: true, message: "User registered successfully" });
 
