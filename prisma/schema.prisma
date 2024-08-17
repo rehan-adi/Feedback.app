@@ -12,7 +12,7 @@ model User {
   username            String   @db.VarChar(50)
   email               String   @unique @db.VarChar(255)
   password            String   @db.VarChar(100)
-  verifycode          String   @db.VarChar(6)
+  verifyCode          String   @db.VarChar(6)
   verifyCodeExpiry    DateTime
   isVerified          Boolean  @default(false)
   isAcceptingMessages Boolean  @default(true)
