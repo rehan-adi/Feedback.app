@@ -1,5 +1,5 @@
 import { resend } from "@/lib/resend";
-import VerificationEmail from "@/emails/Verification";
+import VerificationEmail from "@/emails/VerificationEmail";
 import { NextResponse } from "next/server";
 
 export const sendVerificationEmail = async (

@@ -12,14 +12,14 @@ import {
 
 interface VerificationEmailProps {
   username: string;
-  otp: string;
+  verifyUrl: string; // URL that includes the verification token
 }
 
-export default function VerificationEmail({ username, otp }: VerificationEmailProps) {
+export default function VerificationEmail({ username, verifyUrl }: VerificationEmailProps) {
   return (
     <Html lang="en" dir="ltr">
       <Head>
-        <title>Verification Code</title>
+        <title>Email Verification</title>
         <Font
           fontFamily="Roboto"
           fallbackFontFamily="Verdana"
@@ -31,33 +31,29 @@ export default function VerificationEmail({ username, otp }: VerificationEmailPr
           fontStyle="normal"
         />
       </Head>
-      <Preview>Here&apos;s your verification code: {otp}</Preview>
+      <Preview>Verify your email address</Preview>
       <Section>
         <Row>
           <Heading as="h2">Hello {username},</Heading>
         </Row>
         <Row>
           <Text>
-            Thank you for registering. Please use the following verification
-            code to complete your registration:
+            Thank you for registering. Please click the button below to verify your email address:
           </Text>
         </Row>
         <Row>
-          <Text>{otp}</Text> 
+          <Button
+            href={verifyUrl} // The verification URL with the token
+            style={{ color: '#fff', backgroundColor: '#61dafb', padding: '10px 20px', textDecoration: 'none', borderRadius: '5px' }}
+          >
+            Verify Email
+          </Button>
         </Row>
         <Row>
           <Text>
-            If you did not request this code, please ignore this email.
+            If you did not request this verification, please ignore this email.
           </Text>
         </Row>
-        {/* <Row>
-          <Button
-            href={`http://localhost:3000/verify/${username}`}
-            style={{ color: '#61dafb' }}
-          >
-            Verify here
-          </Button>
-        </Row> */}
       </Section>
     </Html>
   );
