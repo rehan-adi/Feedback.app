@@ -36,7 +36,7 @@ export const POST = async (req: NextRequest) => {
       },
     });
 
-    await sendVerificationEmail({email, username, verifyCode})
+    await sendVerificationEmail(email, username, verifyCode);
 
     return NextResponse.json({ success: true, message: "User registered successfully" });
 
