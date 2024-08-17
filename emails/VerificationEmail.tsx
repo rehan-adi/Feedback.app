@@ -12,7 +12,7 @@ import {
 
 interface VerificationEmailProps {
   username: string;
-  verifyUrl: string; // URL that includes the verification token
+  verifyUrl: string; 
 }
 
 export default function VerificationEmail({ username, verifyUrl }: VerificationEmailProps) {

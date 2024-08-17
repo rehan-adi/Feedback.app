@@ -7,12 +7,16 @@ export const sendVerificationEmail = async (
   username: string,
   verifyCode: string
 ) => {
+  
   try {
+
+    const verifyUrl = `http://localhost:3000/api/users/verify-email?token=${verifyCode}`;
+
     const { data, error } = await resend.emails.send({
         from: 'Acme <onboarding@resend.dev>',
         to: email,
         subject: "verificationCode",
-        react: VerificationEmail({username: username, otp: verifyCode}),
+        react: VerificationEmail({username: username, verifyUrl}),
       });
   
   } catch (error) {
