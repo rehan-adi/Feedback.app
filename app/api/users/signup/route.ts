@@ -23,7 +23,7 @@ export const POST = async (req: NextRequest) => {
 
     const hashedPassword = await bcrypt.hash(password, 10);
     
-    const verifycode = randomBytes(32).toString('hex');
+    const verifyCode = randomBytes(32).toString('hex');
     const verifyCodeExpiry = new Date(Date.now() + 1000 * 60 * 60 * 24);
 
     const user = await prisma.user.create({
@@ -31,12 +31,12 @@ export const POST = async (req: NextRequest) => {
         username,
         email,
         password: hashedPassword,
-        verifycode,
+        verifyCode,
         verifyCodeExpiry
       },
     });
 
-    await sendVerificationEmail({email, username, verifycode})
+    await sendVerificationEmail({email, username, verifyCode})
 
     return NextResponse.json({ success: true, message: "User registered successfully" });
 
