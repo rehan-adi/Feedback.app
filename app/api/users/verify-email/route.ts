@@ -41,8 +41,8 @@ export const GET = async (req: NextRequest) => {
             { status: 200 }
         );
 
-    } catch (error) {
-        console.error("Error during email verification:", error);
+    } catch (error: any) {
+        console.error('Error during email verification:', { message: error.message, stack: error.stack });
         return NextResponse.json(
             { message: 'Server error during email verification' },
             { status: 500 }
