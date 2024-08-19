@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import prisma from '@/lib/prisma';
+import { sendWelcomeEmail } from '@/helper/sendWelcomeEmail';
 
 export const GET = async (req: NextRequest) => {
     try {
@@ -35,6 +36,8 @@ export const GET = async (req: NextRequest) => {
                 verifyCodeExpiry: undefined,
             },
         });
+
+        await sendWelcomeEmail(user.email, user.username);
 
         return NextResponse.json(
             { message: 'Email verified successfully' },
