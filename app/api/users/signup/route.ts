@@ -40,10 +40,10 @@ export const POST = async (req: NextRequest) => {
 
     return NextResponse.json({ success: true, message: "User registered successfully" });
 
-  } catch (error) {
-    console.error(error);
+  } catch (error: any) {
+    console.error('Signup error:', { message: error.message, stack: error.stack });
     return NextResponse.json(
-      { success: false, message: "Error registering user" },
+      { success: false, message: "An error occurred while signing up. Please try again later." },
       { status: 500 }
     );
   }
