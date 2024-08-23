@@ -2,28 +2,27 @@ import { NextRequest, NextResponse } from 'next/server';
 import prisma from '@/lib/prisma';
 import { sendWelcomeEmail } from '@/helper/sendWelcomeEmail';
 
-export const GET = async (req: NextRequest) => {
+export const POST = async (req: NextRequest) => {
     try {
-        const { searchParams } = new URL(req.url);
-        const token = searchParams.get('token');
+        const { verifyCode } = await req.json();
 
-        if (!token) {
-            return NextResponse.json(
-                { message: 'Verification token is missing' },
-                { status: 400 }
-            );
+        if (!verifyCode) {
+          return NextResponse.json(
+            { message: 'Verification code is missing' },
+            { status: 400 }
+          );
         }
 
         const user = await prisma.user.findFirst({
             where: {
-                verifyCode: token,
+                verifyCode: verifyCode,
                 verifyCodeExpiry: { gt: new Date() }
             }
         });
 
         if (!user) {
             return NextResponse.json(
-                { message: 'Invalid or expired token' },
+                { message: 'Invalid or expired verification code' },
                 { status: 400 }
             );
         }
