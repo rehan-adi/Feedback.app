@@ -7,15 +7,14 @@ import {
   Row,
   Section,
   Text,
-  Button,
 } from '@react-email/components';
 
 interface VerificationEmailProps {
   username: string;
-  verifyUrl: string; 
+  verifyCode: string;
 }
 
-export default function VerificationEmail({ username, verifyUrl }: VerificationEmailProps) {
+export default function VerificationEmail({ username, verifyCode }: VerificationEmailProps) {
   return (
     <Html lang="en" dir="ltr">
       <Head>
@@ -38,16 +37,13 @@ export default function VerificationEmail({ username, verifyUrl }: VerificationE
         </Row>
         <Row>
           <Text>
-            Thank you for registering. Please click the button below to verify your email address:
+            Thank you for registering. Please use the following code to verify your email address:
           </Text>
         </Row>
         <Row>
-          <Button
-            href={verifyUrl} // The verification URL with the token
-            style={{ color: '#fff', backgroundColor: '#61dafb', padding: '10px 20px', textDecoration: 'none', borderRadius: '5px' }}
-          >
-            Verify Email
-          </Button>
+          <Text style={{ fontSize: '20px', fontWeight: 'bold' }}>
+            Your Verification Code: {verifyCode}
+          </Text>
         </Row>
         <Row>
           <Text>
