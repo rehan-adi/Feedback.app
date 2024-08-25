@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
+import { useToast } from "@/components/ui/use-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signupValidation } from "@/validation/auth.validation";
 import {
@@ -32,15 +33,30 @@ const Signup = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  const { toast } = useToast();
+
   const onSubmit = async (data: z.infer<typeof signupValidation>) => {
     setLoading(true);
     setError(null);
     try {
       const response = await axios.post("/api/signup", data);
-      console.log(response.data);
-    } catch (error) {
+
+      if (response.status === 200 || response.status === 201) {
+        toast({
+          title: "Signup Successful",
+          description: "Please check your email for verification instructions.",
+        });
+
+        form.reset();
+      }
+    } catch (error: any) {
       console.error(error);
       setError("An error occurred while signing up. Please try again.");
+      toast({
+        title: "Signup Failed",
+        description: "Could not sign up" + error.message,
+        variant: "destructive",
+      });
     } finally {
       setLoading(false);
     }
@@ -49,9 +65,11 @@ const Signup = () => {
   return (
     <div className="w-full h-screen flex justify-center items-center text-white bg-black">
       <div className="p-8 max-w-md w-full mx-auto lg:border border-white border-opacity-10 rounded-lg shadow-md">
-      <header className="text-center mb-8">
+        <header className="text-center mb-8">
           <h1 className="text-2xl font-bold mb-5">Sign Up</h1>
-          <p className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Create your account to get started</p>
+          <p className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+            Create your account to get started
+          </p>
         </header>
         <Form {...form}>
           <form className="space-y-6" onSubmit={form.handleSubmit(onSubmit)}>
@@ -123,7 +141,7 @@ const Signup = () => {
               </div>
             </div>
             <Button type="submit" variant="default" className="w-full">
-            {loading ? "Submitting..." : "Submit"}
+              {loading ? "Submitting..." : "Submit"}
             </Button>
           </form>
         </Form>
