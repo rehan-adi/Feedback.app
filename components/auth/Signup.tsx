@@ -43,10 +43,11 @@ const Signup = () => {
                 <FormItem>
                   <FormLabel>Username</FormLabel>
                   <FormControl>
-                    <Input placeholder="Enter your username"
-                    className="bg-black text-white"
-                     {...field}
-                      />
+                    <Input
+                      placeholder="Enter your username"
+                      className="bg-black text-white"
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -67,7 +68,7 @@ const Signup = () => {
                     />
                   </FormControl>
                   <FormDescription>
-                  We’ll use this email for account verification.
+                    We’ll use this email for account verification.
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
