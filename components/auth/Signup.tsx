@@ -33,7 +33,11 @@ const Signup = () => {
 
   return (
     <div className="w-full h-screen flex justify-center items-center text-white bg-black">
-      <div className="p-8 max-w-md w-full mx-auto border border-white border-opacity-10 rounded-lg shadow-md">
+      <div className="p-8 max-w-md w-full mx-auto lg:border border-white border-opacity-10 rounded-lg shadow-md">
+      <header className="text-center mb-8">
+          <h1 className="text-2xl font-bold mb-5">Sign Up</h1>
+          <p className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Create your account to get started</p>
+        </header>
         <Form {...form}>
           <form className="space-y-6" onSubmit={form.handleSubmit(onSubmit)}>
             <FormField
@@ -45,7 +49,7 @@ const Signup = () => {
                   <FormControl>
                     <Input
                       placeholder="Enter your username"
-                      className="bg-black text-white"
+                      className="bg-black border-white text-white"
                       {...field}
                     />
                   </FormControl>
@@ -62,7 +66,7 @@ const Signup = () => {
                   <FormControl>
                     <Input
                       placeholder="Enter your email"
-                      className="bg-black text-white"
+                      className="bg-black border-white text-white"
                       type="email"
                       {...field}
                     />
@@ -83,7 +87,7 @@ const Signup = () => {
                   <FormControl>
                     <Input
                       placeholder="Enter your password"
-                      className="bg-black text-white"
+                      className="bg-black border-white text-white"
                       type="password"
                       {...field}
                     />
@@ -103,7 +107,7 @@ const Signup = () => {
                 </label>
               </div>
             </div>
-            <Button type="submit" className="w-full">
+            <Button type="submit" variant="default" className="w-full">
               Submit
             </Button>
           </form>
