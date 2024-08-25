@@ -1,6 +1,7 @@
 "use client";
 
 import { z } from "zod";
+import axios from "axios";
 import { useForm } from "react-hook-form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -16,6 +17,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { useState } from "react";
 
 const Signup = () => {
   const form = useForm<z.infer<typeof signupValidation>>({
@@ -27,8 +29,21 @@ const Signup = () => {
     },
   });
 
-  const onSubmit = (data: z.infer<typeof signupValidation>) => {
-    console.log(data);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const onSubmit = async (data: z.infer<typeof signupValidation>) => {
+    setLoading(true);
+    setError(null);
+    try {
+      const response = await axios.post("/api/signup", data);
+      console.log(response.data);
+    } catch (error) {
+      console.error(error);
+      setError("An error occurred while signing up. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -108,7 +123,7 @@ const Signup = () => {
               </div>
             </div>
             <Button type="submit" variant="default" className="w-full">
-              Submit
+            {loading ? "Submitting..." : "Submit"}
             </Button>
           </form>
         </Form>
