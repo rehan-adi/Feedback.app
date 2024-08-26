@@ -34,7 +34,7 @@ const VerifyEmail = () => {
   const { toast } = useToast();
 
   const onSubmit = async (data: z.infer<typeof verifyEmailValidation>) => {
-    setLoading(true); 
+    setLoading(true);
     try {
       const response = await axios.post("/api/verify-email", data);
 
@@ -77,10 +77,10 @@ const VerifyEmail = () => {
               name="verifyCode"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>verifyCode</FormLabel>
+                  <FormLabel>Verification Code</FormLabel>
                   <FormControl>
                     <Input
-                      placeholder="Enter your verifyCode"
+                      placeholder="Enter the verification code"
                       className="bg-black border-white text-white"
                       {...field}
                     />
@@ -92,8 +92,7 @@ const VerifyEmail = () => {
             <Button type="submit" className="w-full">
               {loading ? (
                 <>
-                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />{" "}
-                  Verifying...
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Verifying...
                 </>
               ) : (
                 "Verify Email"
