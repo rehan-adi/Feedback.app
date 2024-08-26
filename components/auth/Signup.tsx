@@ -34,14 +34,12 @@ const Signup = () => {
   });
 
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
 
   const { toast } = useToast();
   const router = useRouter();
 
   const onSubmit = async (data: z.infer<typeof signupValidation>) => {
     setLoading(true);
-    setError(null);
     try {
       const response = await axios.post("/api/signup", data);
 
@@ -57,7 +55,6 @@ const Signup = () => {
       }
     } catch (error: any) {
       console.error(error);
-      setError("An error occurred while signing up. Please try again.");
       toast({
         title: "Signup Failed",
         description: `Could not sign up: ${error.message}`,
