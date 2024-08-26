@@ -47,6 +47,7 @@ const Signup = () => {
         toast({
           title: "Signup Successful",
           description: response.data.message,
+          className: "bg-black text-white border-none"
         });
 
         form.reset();
