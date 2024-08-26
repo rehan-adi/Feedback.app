@@ -2,10 +2,12 @@
 
 import { z } from "zod";
 import axios from "axios";
+import { Loader2 } from "lucide-react"
 import { useForm } from "react-hook-form";
+import { useRouter } from 'next/navigation';
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
+import { Checkbox } from "@/components/ui/checkbox";;
 import { useToast } from "@/components/ui/use-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signupValidation } from "@/validation/auth.validation";
@@ -34,6 +36,7 @@ const Signup = () => {
   const [error, setError] = useState<string | null>(null);
 
   const { toast } = useToast();
+  const router = useRouter();
 
   const onSubmit = async (data: z.infer<typeof signupValidation>) => {
     setLoading(true);
@@ -44,10 +47,12 @@ const Signup = () => {
       if (response.status === 200 || response.status === 201) {
         toast({
           title: "Signup Successful",
-          description: "Please check your email for verification instructions.",
+          description: response.data.message,
         });
 
         form.reset();
+
+        router.push("/verify-email");
       }
     } catch (error: any) {
       console.error(error);
