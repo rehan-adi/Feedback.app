@@ -16,7 +16,7 @@ export const signupValidation = z.object({
     .regex(/.+/, { message: "Password cannot be empty" }),
 });
 
-export const verifyEmailSchema = z.object({
+export const verifyEmailValidation = z.object({
   verifyCode: z
     .string()
     .min(6, { message: "Verification code must be at least 6 characters" }),
