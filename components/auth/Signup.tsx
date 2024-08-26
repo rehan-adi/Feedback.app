@@ -2,12 +2,12 @@
 
 import { z } from "zod";
 import axios from "axios";
-import { Loader2 } from "lucide-react"
+import { Loader2 } from "lucide-react";
 import { useForm } from "react-hook-form";
-import { useRouter } from 'next/navigation';
+import { useRouter } from "next/navigation";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";;
+import { Checkbox } from "@/components/ui/checkbox";
 import { useToast } from "@/components/ui/use-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signupValidation } from "@/validation/auth.validation";
@@ -146,7 +146,14 @@ const Signup = () => {
               </div>
             </div>
             <Button type="submit" variant="default" className="w-full">
-              {loading ? "Submitting..." : "Submit"}
+              {loading ? (
+                <>
+                  ( <Loader2 className="mr-2 h-4 w-4 animate-spin" />{" "}
+                  Submitting...)
+                </>
+              ) : (
+                "Submit"
+              )}
             </Button>
           </form>
         </Form>
