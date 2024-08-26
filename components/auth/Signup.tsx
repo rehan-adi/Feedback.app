@@ -2,6 +2,7 @@
 
 import { z } from "zod";
 import axios from "axios";
+import Link from "next/link";
 import { Loader2 } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
@@ -59,7 +60,7 @@ const Signup = () => {
       setError("An error occurred while signing up. Please try again.");
       toast({
         title: "Signup Failed",
-        description: "Could not sign up" + error.message,
+        description: `Could not sign up: ${error.message}`,
         variant: "destructive",
       });
     } finally {
@@ -145,7 +146,12 @@ const Signup = () => {
                 </label>
               </div>
             </div>
-            <Button type="submit" variant="default" className="w-full">
+            <Button
+              type="submit"
+              variant="default"
+              disabled={loading}
+              className="w-full"
+            >
               {loading ? (
                 <>
                   ( <Loader2 className="mr-2 h-4 w-4 animate-spin" />{" "}
@@ -157,6 +163,14 @@ const Signup = () => {
             </Button>
           </form>
         </Form>
+        <div className="text-center mt-8">
+          <p className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+            Already have a account?{' '}
+            <Link href="/sign-in" className="underline underline-offset-2">
+              Sign in
+            </Link>
+          </p>
+        </div>
       </div>
     </div>
   );
