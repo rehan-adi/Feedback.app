@@ -13,7 +13,13 @@ export const signupValidation = z.object({
   password: z
     .string()
     .min(6, { message: "Password must be at least 6 characters" })
-    .regex(/.+/, { message: "Password cannot be empty" })
+    .regex(/.+/, { message: "Password cannot be empty" }),
+});
+
+export const verifyEmailSchema = z.object({
+  verifyCode: z
+    .string()
+    .min(6, { message: "Verification code must be at least 6 characters" }),
 });
 
 export const signinValidation = z.object({
@@ -21,5 +27,5 @@ export const signinValidation = z.object({
   password: z
     .string()
     .min(6, { message: "Password must be at least 6 characters" })
-    .regex(/.+/, { message: "Password cannot be empty" })
+    .regex(/.+/, { message: "Password cannot be empty" }),
 });
