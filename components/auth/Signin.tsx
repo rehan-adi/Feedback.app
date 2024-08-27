@@ -5,6 +5,7 @@ import axios from "axios";
 import Link from "next/link";
 import { toast } from "sonner";
 import { useState } from "react";
+import { signIn } from 'next-auth/react'
 import { Loader2 } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
@@ -15,7 +16,6 @@ import { signinValidation } from "@/validation/auth.validation";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -59,6 +59,10 @@ const Signin = () => {
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleOAuthSignIn = (provider: string) => {
+    signIn(provider, { callbackUrl: '/' });
   };
 
   return (
@@ -126,6 +130,20 @@ const Signin = () => {
               )}
             </Button>
           </form>
+          <div className="mt-6 flex flex-col space-y-4">
+            <Button
+              onClick={() => handleOAuthSignIn('google')}
+              className="w-full bg-blue-500 hover:bg-blue-600 text-white"
+            >
+              Sign in with Google
+            </Button>
+            <Button
+              onClick={() => handleOAuthSignIn('github')}
+              className="w-full bg-gray-800 hover:bg-gray-700 text-white"
+            >
+              Sign in with GitHub
+            </Button>
+          </div>
         </Form>
       </div>
     </div>
