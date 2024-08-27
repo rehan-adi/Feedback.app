@@ -45,7 +45,7 @@ const Signup = () => {
       if (response.status === 200 || response.status === 201) {
         toast.success("Signup Successful", {
           description: response.data.message,
-          duration: 3000,
+          duration: 1000,
         });
         form.reset();
 

@@ -40,7 +40,7 @@ const VerifyEmail = () => {
       if (response.status === 200) {
         toast.success("Verification Successful", {
           description: response.data.message,
-          duration: 3000,
+          duration: 1000,
         });
 
         form.reset();
