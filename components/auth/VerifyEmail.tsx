@@ -40,7 +40,7 @@ const VerifyEmail = () => {
       if (response.status === 200) {
         toast.success("Verification Successful", {
           description: response.data.message,
-          duration: 1000,
+          duration: 2000,
         });
 
         form.reset();
@@ -49,8 +49,11 @@ const VerifyEmail = () => {
       }
     } catch (error: any) {
       console.error("Error verifying email:", error);
+      const message =
+        error.response?.data?.message || "An error occurred. Please try again.";
+
       toast.error("Verification Failed", {
-        description: `There was an issue verifying your email. Please try again later.`,
+        description: message,
       });
     } finally {
       setLoading(false);
