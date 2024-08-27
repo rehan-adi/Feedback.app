@@ -2,12 +2,12 @@
 
 import { z } from "zod";
 import axios from "axios";
+import { toast } from "sonner";
 import { Loader2 } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { useToast } from "@/components/ui/use-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { verifyEmailValidation } from "@/validation/auth.validation";
 import {
@@ -31,7 +31,6 @@ const VerifyEmail = () => {
   const [loading, setLoading] = useState(false);
 
   const router = useRouter();
-  const { toast } = useToast();
 
   const onSubmit = async (data: z.infer<typeof verifyEmailValidation>) => {
     setLoading(true);
@@ -39,10 +38,9 @@ const VerifyEmail = () => {
       const response = await axios.post("/api/verify-email", data);
 
       if (response.status === 200) {
-        toast({
-          title: "Verification Successful",
-          description:
-            "Your email has been verified successfully. You can now sign in.",
+        toast.success("Verification Successful", {
+          description: response.data.message,
+          duration: 3000,
         });
 
         form.reset();
@@ -51,10 +49,8 @@ const VerifyEmail = () => {
       }
     } catch (error: any) {
       console.error("Error verifying email:", error);
-      toast({
-        title: "Verification Failed",
+      toast.error("Verification Failed", {
         description: `There was an issue verifying your email. Please try again later.`,
-        variant: "destructive",
       });
     } finally {
       setLoading(false);
