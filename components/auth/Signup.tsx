@@ -84,6 +84,7 @@ const Signup = () => {
                     <Input
                       placeholder="Enter your username"
                       className="bg-black border-white text-white"
+                      aria-required="true"
                       {...field}
                     />
                   </FormControl>
@@ -102,6 +103,7 @@ const Signup = () => {
                       placeholder="Enter your email"
                       className="bg-black border-white text-white"
                       type="email"
+                      aria-required="true"
                       {...field}
                     />
                   </FormControl>
@@ -123,6 +125,7 @@ const Signup = () => {
                       placeholder="Enter your password"
                       className="bg-black border-white text-white"
                       type="password"
+                      aria-required="true"
                       {...field}
                     />
                   </FormControl>

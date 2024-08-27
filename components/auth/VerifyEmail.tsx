@@ -81,6 +81,7 @@ const VerifyEmail = () => {
                     <Input
                       placeholder="Enter the verification code"
                       className="bg-black border-white text-white"
+                      aria-required="true"
                       {...field}
                     />
                   </FormControl>
