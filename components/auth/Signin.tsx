@@ -130,17 +130,20 @@ const Signin = () => {
               )}
             </Button>
           </form>
-          <div className="mt-6 flex flex-col space-y-4">
-            <Button
+          <div className="mt-8 flex flex-col space-y-4">
+            {/* <Button
               onClick={() => handleOAuthSignIn('google')}
-              className="w-full bg-blue-500 hover:bg-blue-600 text-white"
+              className="w-full border border-white border-opacity-20 bg-black"
             >
+              <span></span>
               Sign in with Google
-            </Button>
+            </Button> */}
             <Button
+            variant="secondary"
               onClick={() => handleOAuthSignIn('github')}
-              className="w-full bg-gray-800 hover:bg-gray-700 text-white"
+              className="w-full"
             >
+              <img src="/images/github.png" alt="GitHub logo" className="w-5 h-5 mr-2" />
               Sign in with GitHub
             </Button>
           </div>
