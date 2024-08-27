@@ -5,7 +5,7 @@ import axios from "axios";
 import Link from "next/link";
 import { toast } from "sonner";
 import { useState } from "react";
-import { signIn } from 'next-auth/react'
+import { signIn } from "next-auth/react";
 import { Loader2 } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
@@ -24,6 +24,7 @@ import {
 
 const Signin = () => {
   const [loading, setLoading] = useState(false);
+  const [githubLoading, setGithubLoading] = useState(false);
 
   const router = useRouter();
 
@@ -61,9 +62,18 @@ const Signin = () => {
     }
   };
 
-  const handleOAuthSignIn = (provider: string) => {
-    signIn(provider, { callbackUrl: '/' });
+  const handleOAuthSignIn = async (provider: string) => {
+    try {
+      setGithubLoading(true);
+      await signIn(provider, { callbackUrl: "/" });
+    } catch (error) {
+      console.error("OAuth Signin Error: ", error);
+      toast.error("Failed to sign in with GitHub.");
+    } finally {
+      setGithubLoading(false);
+    }
   };
+  
 
   return (
     <div className="w-full h-screen flex justify-center items-center text-white bg-black">
@@ -139,12 +149,31 @@ const Signin = () => {
               Sign in with Google
             </Button> */}
             <Button
-            variant="secondary"
-              onClick={() => handleOAuthSignIn('github')}
+              variant="secondary"
+              onClick={() => handleOAuthSignIn("github")}
               className="w-full"
+              disabled={githubLoading}
             >
-              <img src="/images/github.png" alt="GitHub logo" className="w-5 h-5 mr-2" />
-              Sign in with GitHub
+              {githubLoading ? (
+                <>
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  <img
+                    src="/images/github.png"
+                    alt="GitHub logo"
+                    className="w-5 h-5 mr-2"
+                  />
+                  Sign in with GitHub.....
+                </>
+              ) : (
+                <>
+                  <img
+                    src="/images/github.png"
+                    alt="GitHub logo"
+                    className="w-5 h-5 mr-2"
+                  />
+                  Sign in with GitHub
+                </>
+              )}
             </Button>
           </div>
         </Form>
