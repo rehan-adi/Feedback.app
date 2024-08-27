@@ -53,8 +53,10 @@ const Signup = () => {
       }
     } catch (error: any) {
       console.error(error);
+      const message =
+        error.response?.data?.message || "An error occurred. Please try again.";
       toast.error("Signup Failed", {
-        description: `Could not sign up: ${error.message}`,
+        description: message,
       });
     } finally {
       setLoading(false);
