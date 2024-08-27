@@ -3,13 +3,13 @@
 import { z } from "zod";
 import axios from "axios";
 import Link from "next/link";
+import { toast } from "sonner";
 import { Loader2 } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
-import { useToast } from "@/components/ui/use-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signupValidation } from "@/validation/auth.validation";
 import {
@@ -35,7 +35,6 @@ const Signup = () => {
 
   const [loading, setLoading] = useState(false);
 
-  const { toast } = useToast();
   const router = useRouter();
 
   const onSubmit = async (data: z.infer<typeof signupValidation>) => {
@@ -44,22 +43,18 @@ const Signup = () => {
       const response = await axios.post("/api/signup", data);
 
       if (response.status === 200 || response.status === 201) {
-        toast({
-          title: "Signup Successful",
+        toast.success("Signup Successful", {
           description: response.data.message,
-          className: "bg-black text-white border-none"
+          duration: 8000,
         });
-
         form.reset();
 
         router.push("/verify-email");
       }
     } catch (error: any) {
       console.error(error);
-      toast({
-        title: "Signup Failed",
+      toast.error("Signup Failed", {
         description: `Could not sign up: ${error.message}`,
-        variant: "destructive",
       });
     } finally {
       setLoading(false);
@@ -163,7 +158,7 @@ const Signup = () => {
         </Form>
         <div className="text-center mt-8">
           <p className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
-            Already have a account?{' '}
+            Already have a account?{" "}
             <Link href="/sign-in" className="underline underline-offset-2">
               Sign in
             </Link>
