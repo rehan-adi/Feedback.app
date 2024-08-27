@@ -145,6 +145,14 @@ const Signin = () => {
             </Button>
           </div>
         </Form>
+        <div className="text-center mt-8">
+          <p className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+            Don't have a account?{" "}
+            <Link href="/signup" className="underline underline-offset-2">
+              Sign Up
+            </Link>
+          </p>
+        </div>
       </div>
     </div>
   );

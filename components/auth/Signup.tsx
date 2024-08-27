@@ -164,7 +164,7 @@ const Signup = () => {
         <div className="text-center mt-8">
           <p className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
             Already have a account?{" "}
-            <Link href="/sign-in" className="underline underline-offset-2">
+            <Link href="/signin" className="underline underline-offset-2">
               Sign in
             </Link>
           </p>
