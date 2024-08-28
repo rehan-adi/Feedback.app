@@ -1,11 +1,12 @@
 import { User } from "lucide-react";
+import { Badge } from "@/components/ui/badge"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const Profile = () => {
   return (
-    <div className="w-full h-screen flex justify-center lg:flex-row py-5 lg:px-0 px-4 flex-col mt-5 gap-3 items-center text-white bg-black">
-      <div className="bg-[#1d26435c] py-5 flex justify-start items-center flex-col px-4 h-[75vh] lg:mt-0 mt-16 rounded-2xl w-full lg:w-[25vw]">
-        <Avatar className="mt-7 w-24 h-24">
+    <div className="w-full min-h-screen flex justify-center lg:flex-row py-8 lg:px-0 px-4 flex-col mt-2 gap-3 items-center text-white bg-black">
+      <div className="bg-[#1d26435c] py-5 flex justify-start items-center flex-col px-4 h-[35vh] lg:h-[75vh] lg:mt-0 mt-16 rounded-2xl w-full lg:w-[25vw]">
+        <Avatar className="lg:mt-7 mt-2 w-24 h-24">
           <AvatarImage src="https://github.com/shadcn.png" />
           <AvatarFallback>CN</AvatarFallback>
         </Avatar>
@@ -14,7 +15,7 @@ const Profile = () => {
           rehanali@gmail.com
         </h1>
       </div>
-      <div className="bg-black rounded-2xl border border-white border-opacity-20 h-[75vh] w-full lg:w-[45vw]">
+      <div className="bg-black rounded-2xl border border-white border-opacity-20 h-[56vh] lg:h-[75vh] w-full lg:w-[45vw]">
         <div className="w-full border-b py-6 px-6 gap-2 flex flex-col border-white border-opacity-20">
           <div className="gap-2 flex items-center">
             <User />
@@ -35,11 +36,9 @@ const Profile = () => {
               johndoe@example.com
             </p>
           </div>
-          <div className="flex flex-col gap-1.5">
+          <div className="flex flex-col gap-2">
             <h2 className="text-sm font-medium">Email Verified</h2>
-            <p className="text-sm font-semibold px-3 py-1 bg-green-600 text-white rounded-full w-fit">
-              Yes
-            </p>
+            <Badge variant="secondary" className="w-[68px]">Verified</Badge>
           </div>
         </div>
       </div>
