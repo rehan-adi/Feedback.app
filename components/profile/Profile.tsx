@@ -1,8 +1,6 @@
-import React from 'react'
-
 const Profile = () => {
   return (
-    <div>Profile</div>
+    <div className="w-full h-screen flex justify-center items-center text-white bg-black">Profile</div>
   )
 }
 
