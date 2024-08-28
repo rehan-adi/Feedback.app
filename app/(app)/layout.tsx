@@ -1,5 +1,5 @@
-import Footer from '@/components/dashboard/Footer'
-import Navbar from '@/components/dashboard/Navbar'
+import Footer from '@/components/common/Footer'
+import Navbar from '@/components/common/Navbar'
 
 const layout = () => {
   return (
