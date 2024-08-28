@@ -41,7 +41,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="bg-black flex justify-between border-b border-white border-opacity-15 fixed top-0 items-center lg:px-24 px-6 text-white h-20 w-full ">
+    <div className="bg-black flex justify-between z-50 border-b border-white border-opacity-15 fixed top-0 items-center lg:px-24 px-6 text-white h-20 w-full ">
       <h1>Logo</h1>
       <div>
         <DropdownMenu>
