@@ -48,7 +48,7 @@ const Signin = () => {
           duration: 2000,
         });
         form.reset();
-        router.push("/");
+        router.push("/dashboard");
       }
     } catch (error: any) {
       console.error(error);
