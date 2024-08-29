@@ -22,13 +22,9 @@ const Profile = () => {
 
         if (response.status === 200) {
           setProfileData(response.data.userProfile);
-          toast(
-            "Profile loaded successfully",
-            {
-              description: response.data.message,
-              duration: 2000,
-            }
-          )
+          toast(response.data.message, {
+            duration: 2000,
+          });
         }
 
         setLoading(false);
