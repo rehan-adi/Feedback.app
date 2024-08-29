@@ -16,13 +16,12 @@ const Profile = () => {
   useEffect(() => {
     const profileData = async () => {
       try {
-        const response = await axios.get("/api/profile");
-
-        console.log(response);
-        
+        const response = await axios.get("/api/profile"); 
+        console.log(response.data);
+               
 
         if (response.status === 200) {
-          setProfileData(response.data);
+          setProfileData(response.data.userProfile);
           toast(
             "Profile loaded successfully",
             {
@@ -54,9 +53,9 @@ const Profile = () => {
           <AvatarImage src="https://github.com/shadcn.png" />
           <AvatarFallback>CN</AvatarFallback>
         </Avatar>
-        <h1 className="text-white font-semibold mt-5 mb-1 text-xl">MD Rehan</h1>
+        <h1 className="text-white font-semibold mt-5 mb-1 text-xl">{profileData?.username}</h1>
         <h1 className="text-xs text-[#9CA3AF] mt-1 font-medium">
-          rehanali@gmail.com
+        {profileData?.email}
         </h1>
       </div>
       <div className="bg-black rounded-2xl border border-white border-opacity-20 h-[56vh] lg:h-[75vh] w-full lg:w-[45vw]">
@@ -72,18 +71,18 @@ const Profile = () => {
         <div className="flex flex-col gap-5 px-6 py-8">
           <div className="flex flex-col gap-1">
             <h2 className="text-sm font-medium">Username</h2>
-            <p className="text-sm font-semibold text-[#9CA3AF]">John Doe</p>
+            <p className="text-sm font-semibold text-[#9CA3AF]">{profileData?.username}</p>
           </div>
           <div className="flex flex-col gap-1">
             <h2 className="text-sm font-medium">Email</h2>
             <p className="text-sm font-semibold text-[#9CA3AF] ">
-              johndoe@example.com
+            {profileData?.email}
             </p>
           </div>
           <div className="flex flex-col gap-2">
             <h2 className="text-sm font-medium">Email Verified</h2>
             <Badge variant="secondary" className="w-[68px]">
-              Verified
+            {profileData?.emailVerified}
             </Badge>
           </div>
         </div>
