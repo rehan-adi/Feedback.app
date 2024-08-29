@@ -46,7 +46,7 @@ export const GET = async(req: NextRequest) => {
       }
   
       return NextResponse.json(
-        { success: true, userProfile, message: 'User profile retrieved successfully' },
+        { success: true, userProfile, message: 'Profile loaded successfully' },
         { status: 200 }
       );
 
