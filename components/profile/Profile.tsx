@@ -5,11 +5,12 @@ import { toast } from "sonner";
 import { useEffect, useState } from "react";
 import { User } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { profileData } from "@/validation/profile.validation";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const Profile = () => {
 
-  const [profileData, setProfileData] = useState('');
+  const [profileData, setProfileData] = useState<profileData>();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
