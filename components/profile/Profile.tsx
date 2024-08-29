@@ -46,9 +46,10 @@ const Profile = () => {
   return (
     <div className="w-full min-h-screen flex justify-center lg:flex-row py-8 lg:px-0 px-4 flex-col mt-2 gap-3 items-center text-white bg-black">
       {loading ? (
-        <>
+        <div className="flex items-center justify-center w-full h-full">
           <Loader2 className="h-8 w-8 animate-spin" />
-        </>
+          <span className="ml-3 text-white text-sm font-medium">Loading profile...</span>
+        </div>
       ) : (
         <>
           <div className="bg-[#1d26435c] py-5 flex justify-start items-center flex-col px-4 h-[35vh] lg:h-[75vh] lg:mt-0 mt-16 rounded-2xl w-full lg:w-[25vw]">
