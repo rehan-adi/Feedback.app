@@ -1,8 +1,42 @@
+import axios from "axios";
+import { toast } from "sonner";
+import { useEffect } from "react";
 import { User } from "lucide-react";
-import { Badge } from "@/components/ui/badge"
+import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const Profile = () => {
+  useEffect(() => {
+    const profileData = async () => {
+      try {
+        const response = await axios.get("/api/profile");
+
+        console.log(response);
+        
+
+        if (response.status === 200) {
+          toast(
+            "Profile loaded successfully",
+            {
+              description: response.data.message,
+              duration: 2000,
+            }
+          )
+        }
+
+      } catch (error: any) {
+        console.error(error);
+        const message =
+          error.response?.data?.message ||
+          "An error occurred. Please try again.";
+        toast.error("Signin Failed", {
+          description: message,
+        });
+      }
+    };
+    profileData();
+  }, []);
+
   return (
     <div className="w-full min-h-screen flex justify-center lg:flex-row py-8 lg:px-0 px-4 flex-col mt-2 gap-3 items-center text-white bg-black">
       <div className="bg-[#1d26435c] py-5 flex justify-start items-center flex-col px-4 h-[35vh] lg:h-[75vh] lg:mt-0 mt-16 rounded-2xl w-full lg:w-[25vw]">
@@ -38,7 +72,9 @@ const Profile = () => {
           </div>
           <div className="flex flex-col gap-2">
             <h2 className="text-sm font-medium">Email Verified</h2>
-            <Badge variant="secondary" className="w-[68px]">Verified</Badge>
+            <Badge variant="secondary" className="w-[68px]">
+              Verified
+            </Badge>
           </div>
         </div>
       </div>
