@@ -1,11 +1,17 @@
+"use client"
+
 import axios from "axios";
 import { toast } from "sonner";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { User } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const Profile = () => {
+
+  const [profileData, setProfileData] = useState('');
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     const profileData = async () => {
       try {
@@ -15,6 +21,7 @@ const Profile = () => {
         
 
         if (response.status === 200) {
+          setProfileData(response.data);
           toast(
             "Profile loaded successfully",
             {
@@ -23,6 +30,8 @@ const Profile = () => {
             }
           )
         }
+
+        setLoading(false);
 
       } catch (error: any) {
         console.error(error);
