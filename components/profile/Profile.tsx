@@ -81,8 +81,11 @@ const Profile = () => {
           </div>
           <div className="flex flex-col gap-2">
             <h2 className="text-sm font-medium">Email Verified</h2>
-            <Badge variant="secondary" className="w-[68px]">
-            {profileData?.emailVerified}
+            <Badge 
+              variant={profileData?.isVerified ? "secondary" : "destructive"} 
+              className="w-[68px]"
+            >
+              {profileData?.isVerified ? "Verified" : "Not Verified"}
             </Badge>
           </div>
         </div>
