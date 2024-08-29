@@ -2,9 +2,8 @@
 
 import axios from "axios";
 import { toast } from "sonner";
-import { User } from "lucide-react";
-import { Loader2 } from "lucide-react";
 import { useEffect, useState } from "react";
+import { Loader2, User } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { profileData } from "@/validation/profile.validation";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -55,7 +54,9 @@ const Profile = () => {
           <div className="bg-[#1d26435c] py-5 flex justify-start items-center flex-col px-4 h-[35vh] lg:h-[75vh] lg:mt-0 mt-16 rounded-2xl w-full lg:w-[25vw]">
             <Avatar className="lg:mt-7 mt-2 w-24 h-24">
               <AvatarImage src="https://github.com/shadcn.png" />
-              <AvatarFallback>CN</AvatarFallback>
+              <AvatarFallback>
+                {profileData?.username?.charAt(0) || "U"}
+              </AvatarFallback>
             </Avatar>
             <h1 className="text-white font-semibold mt-5 mb-1 text-xl">
               {profileData?.username}
