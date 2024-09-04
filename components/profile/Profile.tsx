@@ -2,6 +2,8 @@
 
 import axios from "axios";
 import { toast } from "sonner";
+import { Edit } from "lucide-react";
+import { Button } from "../ui/button";
 import { useEffect, useState } from "react";
 import { Loader2, User } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
@@ -48,7 +50,9 @@ const Profile = () => {
       {loading ? (
         <div className="flex items-center justify-center w-full h-full">
           <Loader2 className="h-8 w-8 animate-spin" />
-          <span className="ml-3 text-white text-sm font-medium">Loading profile...</span>
+          <span className="ml-3 text-white text-sm font-medium">
+            Loading profile...
+          </span>
         </div>
       ) : (
         <>
@@ -67,14 +71,19 @@ const Profile = () => {
             </h1>
           </div>
           <div className="bg-black rounded-2xl border border-white border-opacity-20 h-[56vh] lg:h-[75vh] w-full lg:w-[45vw]">
-            <div className="w-full border-b py-6 px-6 gap-2 flex flex-col border-white border-opacity-20">
-              <div className="gap-2 flex items-center">
-                <User />
-                <span className="text-lg font-semibold">Profile</span>
+            <div className="w-full border-b py-6 px-6 gap-2 flex items-center justify-between border-white border-opacity-20">
+              <div>
+                <div className="gap-2 flex items-center">
+                  <User />
+                  <span className="text-lg font-semibold">Profile</span>
+                </div>
+                <p className="text-xs text-[#9CA3AF] font-medium">
+                  This page shows you your profile and account details
+                </p>
               </div>
-              <p className="text-xs text-[#9CA3AF] font-medium">
-                This page shows you your profile and account details
-              </p>
+              <Button size="icon" variant="outline">
+                <Edit className="text-xs text-black"/>
+              </Button>
             </div>
             <div className="flex flex-col gap-5 px-6 py-8">
               <div className="flex flex-col gap-1">
