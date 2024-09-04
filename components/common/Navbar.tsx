@@ -40,6 +40,11 @@ const Navbar = () => {
     }
   };
 
+  const onProfile = (event: React.MouseEvent<HTMLDivElement>) => {
+    event.stopPropagation();
+    router.push("/profile");
+  }
+
   return (
     <div className="bg-black flex justify-between z-50 border-b border-white border-opacity-15 fixed top-0 items-center lg:px-24 px-6 text-white h-20 w-full ">
       <h1>Logo</h1>
@@ -55,7 +60,7 @@ const Navbar = () => {
             <DropdownMenuLabel>My Account</DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
-              <DropdownMenuItem>
+              <DropdownMenuItem onClick={onProfile}>
                 <User className="mr-2 h-4 w-4" />
                 <span>Profile</span>
                 <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
