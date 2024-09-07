@@ -2,15 +2,13 @@
 
 import { z } from "zod";
 import axios from "axios";
-import { toast } from "sonner";;
+import { toast } from "sonner";
 import { Edit } from "lucide-react";
 import { Button } from "../ui/button";
 import { useEffect, useState } from "react";
 import UpdateProfile from "./UpdateProfile";
 import { Loader2, User } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { FormProvider, useForm } from "react-hook-form";
 import { profileValidation } from "@/validation/profile.validation";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
@@ -28,14 +26,6 @@ const Profile = () => {
   const [profileData, setProfileData] = useState<ProfileFormData>();
   const [loading, setLoading] = useState(true);
 
-  const methods = useForm({
-    resolver: zodResolver(profileValidation),
-    defaultValues: {
-      username: '',
-      email: '',
-    },
-  });
-
   useEffect(() => {
     const fetchProfileData = async () => {
       setLoading(true);
@@ -45,10 +35,6 @@ const Profile = () => {
 
         if (response.status === 200) {
           setProfileData(response.data.userProfile);
-          methods.reset({
-            username: response.data.userProfile?.username,
-            email: response.data.userProfile?.email,
-          });
           toast.success(response.data.message, {
             duration: 2000,
           });
@@ -69,7 +55,7 @@ const Profile = () => {
       }
     };
     fetchProfileData();
-  }, [methods]);
+  }, []);
 
   return (
     <div className="w-full min-h-screen flex justify-center lg:flex-row py-8 lg:px-0 px-4 flex-col mt-2 gap-3 items-center text-white bg-black">
@@ -120,7 +106,7 @@ const Profile = () => {
                       Here you can edit your profile details.
                     </DialogDescription>
                   </DialogHeader>
-                   <UpdateProfile />
+                  <UpdateProfile />
                 </DialogContent>
               </Dialog>
             </div>
