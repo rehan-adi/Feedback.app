@@ -1,6 +1,7 @@
 import prisma from "@/lib/prisma";
 import jwt from "jsonwebtoken";
 import { NextRequest, NextResponse } from "next/server";
+import { updateProfileValidation } from "@/validation/profile.validation";
 
 export const PUT = async (req: NextRequest) => {
   try {
@@ -13,12 +14,20 @@ export const PUT = async (req: NextRequest) => {
       );
     }
 
-    const decoded = jwt.verify(token, process.env.JWT_SECRET!) as {
-      id: string;
-    };
-    const userId = decoded.id;
+    let userId;
+    try {
+      const decoded = jwt.verify(token, process.env.JWT_SECRET!) as {
+        id: string;
+      };
+      userId = decoded.id;
+    } catch (err) {
+      return NextResponse.json(
+        { success: false, message: "Invalid or expired token" },
+        { status: 401 }
+      );
+    }
 
-    const existingUser = await prisma.user.findFirst({
+    const existingUser = await prisma.user.findUnique({
       where: { id: userId },
     });
 
@@ -29,7 +38,10 @@ export const PUT = async (req: NextRequest) => {
       );
     }
 
-    const { username } = await req.json();
+    const body = await req.json();
+    const parseData = updateProfileValidation.parse(body);
+
+    const { username } = parseData;
 
     await prisma.user.update({
       where: { id: userId },
@@ -43,7 +55,6 @@ export const PUT = async (req: NextRequest) => {
       },
       { status: 200 }
     );
-    
   } catch (error: any) {
     console.error("Error while updating profile:", {
       message: error.message,
