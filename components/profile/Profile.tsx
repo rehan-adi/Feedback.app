@@ -2,14 +2,15 @@
 
 import { z } from "zod";
 import axios from "axios";
-import { toast } from "sonner";
-import { Input } from "../ui/input";
+import { toast } from "sonner";;
 import { Edit } from "lucide-react";
 import { Button } from "../ui/button";
-import { FormProvider, useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
+import UpdateProfile from "./UpdateProfile";
 import { Loader2, User } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { FormProvider, useForm } from "react-hook-form";
 import { profileValidation } from "@/validation/profile.validation";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
@@ -20,8 +21,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { FormControl, FormField, FormItem, FormLabel } from "../ui/form";
-import { zodResolver } from "@hookform/resolvers/zod";
 
 type ProfileFormData = z.infer<typeof profileValidation>;
 
@@ -121,47 +120,7 @@ const Profile = () => {
                       Here you can edit your profile details.
                     </DialogDescription>
                   </DialogHeader>
-                 <FormProvider  {...methods}>
-                     <form onSubmit={methods.handleSubmit((data) => {
-                        console.log(data);
-                      })}>
-                      <FormField
-                        control={methods.control}
-                        name="username"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>Username</FormLabel>
-                            <FormControl>
-                              <Input
-                                placeholder="Enter your username"
-                                className="bg-black border-white text-white"
-                                {...field}
-                              />
-                            </FormControl>
-                          </FormItem>
-                        )}
-                      />
-                    <div className="flex justify-end mt-5 space-x-2">
-                      <Button
-                        type="button"
-                        variant="outline"
-                        onClick={() => {
-                          /* Handle cancel */
-                        }}
-                      >
-                        Cancel
-                      </Button>
-                      <Button
-                        type="submit"
-                        onClick={() => {
-                          /* Handle save */
-                        }}
-                      >
-                        Save
-                      </Button>
-                    </div>
-                     </form>
-                 </FormProvider>
+                   <UpdateProfile />
                 </DialogContent>
               </Dialog>
             </div>

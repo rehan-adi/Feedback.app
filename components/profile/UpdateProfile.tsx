@@ -1,3 +1,5 @@
+"use client";
+
 import { z } from "zod";
 import axios from "axios";
 import { toast } from "sonner";
@@ -12,6 +14,7 @@ import { updateProfileValidation } from "@/validation/profile.validation";
 type UpdateProfileFormData = z.infer<typeof updateProfileValidation>;
 
 const UpdateProfile = () => {
+
   const methods = useForm<UpdateProfileFormData>({
     resolver: zodResolver(updateProfileValidation),
     defaultValues: {
@@ -23,7 +26,12 @@ const UpdateProfile = () => {
     try {
       const response = await axios.post('/api/update-profile', data);
       console.log(response.data);
-      toast.success(response.data.message, { duration: 2000 });
+
+      if(response.status === 200) { 
+        toast.success(response.data.message, { duration: 2000 });
+        methods.reset();
+      }
+
     } catch (error: any) {
       console.error(error);
       const message =
@@ -53,15 +61,6 @@ const UpdateProfile = () => {
           )}
         />
         <div className="flex justify-end mt-5 space-x-2">
-          <Button
-            type="button"
-            variant="outline"
-            onClick={() => {
-              // Handle cancel
-            }}
-          >
-            Cancel
-          </Button>
           <Button
             type="submit"
           >
