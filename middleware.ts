@@ -24,5 +24,6 @@ export const config = {
     '/verify-email',
     '/signin',
     '/dashboard',
+    '/profile',
   ]
 }
