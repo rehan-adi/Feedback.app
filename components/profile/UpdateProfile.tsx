@@ -9,35 +9,38 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, FormProvider, SubmitHandler } from "react-hook-form";
 import { FormControl, FormField, FormItem, FormLabel } from "../ui/form";
 import { updateProfileValidation } from "@/validation/profile.validation";
-
+import { useState } from "react";
+import { Loader2 } from "lucide-react";
 
 type UpdateProfileFormData = z.infer<typeof updateProfileValidation>;
 
 const UpdateProfile = () => {
+  const [loading, setLoading] = useState(false);
 
   const methods = useForm<UpdateProfileFormData>({
     resolver: zodResolver(updateProfileValidation),
     defaultValues: {
-      username: '',
+      username: "",
     },
   });
 
   const onSubmit: SubmitHandler<UpdateProfileFormData> = async (data) => {
+    setLoading(true);
     try {
-      const response = await axios.post('/api/update-profile', data);
-      console.log(response.data);
+      const response = await axios.put("/api/update-profile", data);
 
-      if(response.status === 200) { 
+      if (response.status === 200) {
         toast.success(response.data.message, { duration: 2000 });
         methods.reset();
       }
-
     } catch (error: any) {
       console.error(error);
       const message =
         error.response?.data?.message ||
         "An error occurred while updating the profile.";
       toast.error(message, { duration: 2000 });
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -61,10 +64,14 @@ const UpdateProfile = () => {
           )}
         />
         <div className="flex justify-end mt-5 space-x-2">
-          <Button
-            type="submit"
-          >
-            Save
+          <Button type="submit">
+            {loading ? (
+              <>
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Updating...
+              </>
+            ) : (
+              "Update"
+            )}
           </Button>
         </div>
       </form>
