@@ -3,7 +3,7 @@
 import { z } from "zod";
 import axios from "axios";
 import { toast } from "sonner";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Input } from "../ui/input";
 import { Switch } from "../ui/switch";
 import { Button } from "../ui/button";
@@ -55,6 +55,22 @@ const Settings = () => {
     }
   };
 
+  useEffect(() => {
+    const fetchMessagePreferences = async () => {
+      try {
+        const response = await axios.get("/api/accept-message");
+        if (response.status === 200) {
+          setAcceptMessages(response.data.acceptMessages);
+        }
+      } catch (error) {
+        console.error("Error fetching message preferences:", error);
+      }
+    };
+
+    fetchMessagePreferences();
+  }, []);
+
+
   const handleAcceptMessagesChange = async (checked: boolean) => {
     setAcceptMessages(checked);
     try {
@@ -80,7 +96,7 @@ const Settings = () => {
         <ul className="space-y-4">
           <li
             className={`cursor-pointer text-[#9CA3AF] text-sm font-medium ${
-              activeOption === "password" ? "text-blue-400" : ""
+              activeOption === "password" ? "text-white" : ""
             }`}
             onClick={() => setActiveOption("password")}
           >
@@ -88,7 +104,7 @@ const Settings = () => {
           </li>
           <li
             className={`cursor-pointer text-[#9CA3AF] text-sm font-medium ${
-              activeOption === "messages" ? "text-blue-400" : ""
+              activeOption === "messages" ? "text-white" : ""
             }`}
             onClick={() => setActiveOption("messages")}
           >
@@ -181,16 +197,21 @@ const Settings = () => {
 
             {/* Accept Messages Toggle */}
             {activeOption === "messages" && (
-              <div className="flex items-center justify-between mb-4">
-                <label className="text-sm font-medium text-white">
-                  Accept Messages
-                </label>
-                <Switch
-                  checked={acceptMessages}
-                  onCheckedChange={handleAcceptMessagesChange}
-                  className="bg-gray-800"
-                />
-              </div>
+             <div className="space-y-4">
+             <div className="flex items-center justify-between mb-4">
+               <label className="text-sm font-medium text-white">
+                 Accept Messages
+               </label>
+               <Switch
+                 checked={acceptMessages}
+                 onCheckedChange={handleAcceptMessagesChange}
+                 className="bg-gray-800"
+               />
+             </div>
+             <p className="text-sm text-[#9CA3AF]">
+               {acceptMessages ? "You are currently accepting messages." : "You are not accepting messages."}
+             </p>
+           </div>
             )}
           </CardContent>
         </Card>
