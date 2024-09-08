@@ -89,8 +89,9 @@ const Settings = () => {
 
   return (
     <div className="flex h-screen bg-black text-white">
+      
       {/* Sidebar */}
-      <aside className="w-72 h-full bg-black fixed pt-28 left-0 border-r border-white border-opacity-15 flex flex-col justify-start p-5">
+      <aside className="w-72 h-full bg-black fixed pt-28 left-0 border-r border-white border-opacity-15 hidden lg:flex flex-col justify-start p-5">
         <h2 className="text-2xl font-semibold mb-9">Settings</h2>
 
         <ul className="space-y-4">
@@ -120,8 +121,8 @@ const Settings = () => {
       </aside>
 
       {/* Main Content */}
-      <div className="flex-1 flex items-center justify-center">
-        <Card className="w-96 bg-black border border-white border-opacity-15 text-white shadow-lg">
+      <div className="flex-1 flex items-center lg:px-0 px-2 lg:mt-0 mt-10 justify-center">
+        <Card className="lg:w-96 w-full bg-black border border-white border-opacity-15 text-white shadow-lg">
           <CardHeader className="text-center text-xl font-bold">
             {activeOption === "" && "Settings Overview"}
             {activeOption === "password" && "Change Password"}
