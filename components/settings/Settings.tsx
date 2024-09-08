@@ -3,19 +3,24 @@
 import { z } from "zod";
 import axios from "axios";
 import { toast } from "sonner";
-import { useEffect, useState } from "react";
 import { Input } from "../ui/input";
 import { Switch } from "../ui/switch";
 import { Button } from "../ui/button";
 import { Loader2 } from "lucide-react";
+import { useEffect, useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, useForm } from "react-hook-form";
 import { Card, CardHeader, CardContent } from "../ui/card";
 import { changePasswordValidation } from "@/validation/auth.validation";
-import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "../ui/form";
+import {
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "../ui/form";
 
 const Settings = () => {
-    
   const [loading, setLoading] = useState(false);
   const [activeOption, setActiveOption] = useState("");
   const [acceptMessages, setAcceptMessages] = useState<boolean>(true);
@@ -25,31 +30,34 @@ const Settings = () => {
     defaultValues: {
       password: "",
     },
-  })
+  });
 
   const handleLogout = () => {
     console.log("User logged out");
   };
 
-  const handlePasswordChange = async (data: z.infer<typeof changePasswordValidation>) => {
+  const handlePasswordChange = async (
+    data: z.infer<typeof changePasswordValidation>
+  ) => {
     setLoading(true);
     try {
-      const response = await axios.post("/api/change-password", {password: data.password});
+      const response = await axios.post("/api/change-password", {
+        password: data.password,
+      });
 
-      if(response.status === 200) {
-          toast.success("Password Changed Successfully", {
-            duration: 2000,
-          });
-          form.reset();
-      }
-
-    } catch (error: any) {
-        console.error(error);
-        const message =
-          error.response?.data?.message || "An error occurred. Please try again.";
-        toast.error("Failed to change Password", {
-          description: message,
+      if (response.status === 200) {
+        toast.success("Password Changed Successfully", {
+          duration: 2000,
         });
+        form.reset();
+      }
+    } catch (error: any) {
+      console.error(error);
+      const message =
+        error.response?.data?.message || "An error occurred. Please try again.";
+      toast.error("Failed to change Password", {
+        description: message,
+      });
     } finally {
       setLoading(false);
     }
@@ -70,26 +78,48 @@ const Settings = () => {
     fetchMessagePreferences();
   }, []);
 
-
   const handleAcceptMessagesChange = async (checked: boolean) => {
     setAcceptMessages(checked);
     try {
-      const response = await axios.post("/api/accept-message", { acceptMessages: checked }); 
+      const response = await axios.post("/api/accept-message", {
+        acceptMessages: checked,
+      });
 
       if (response.status === 200) {
         toast.success("Accept Messages Settings Updated", {
           duration: 2000,
         });
       }
-
     } catch (error) {
       console.error("Error updating accept messages:", error);
     }
   };
 
   return (
-    <div className="flex h-screen bg-black text-white">
-      
+    <div className="lg:flex h-screen bg-black text-white">
+
+      {/* sidebar for small screen */}
+      <div className="lg:hidden py-6 mt-20 flex justify-center items-center">
+        <ul className="flex gap-4">
+          <li
+            className={`cursor-pointer text-[#9CA3AF] text-sm font-medium ${
+              activeOption === "password" ? "text-white" : ""
+            }`}
+            onClick={() => setActiveOption("password")}
+          >
+            Change Password
+          </li>
+          <li
+            className={`cursor-pointer text-[#9CA3AF] text-sm font-medium ${
+              activeOption === "messages" ? "text-white" : ""
+            }`}
+            onClick={() => setActiveOption("messages")}
+          >
+            Accept Messages
+          </li>
+        </ul>
+      </div>
+
       {/* Sidebar */}
       <aside className="w-72 h-full bg-black fixed pt-28 left-0 border-r border-white border-opacity-15 hidden lg:flex flex-col justify-start p-5">
         <h2 className="text-2xl font-semibold mb-9">Settings</h2>
@@ -121,7 +151,7 @@ const Settings = () => {
       </aside>
 
       {/* Main Content */}
-      <div className="flex-1 flex items-center lg:px-0 px-2 lg:mt-0 mt-10 justify-center">
+      <div className="flex-1 flex items-center lg:px-0 px-2 lg:mt-0 mt-2 justify-center">
         <Card className="lg:w-96 w-full bg-black border border-white border-opacity-15 text-white shadow-lg">
           <CardHeader className="text-center text-xl font-bold">
             {activeOption === "" && "Settings Overview"}
@@ -163,57 +193,69 @@ const Settings = () => {
             {/* Change Password Form */}
             {activeOption === "password" && (
               <FormProvider {...form}>
-              <form onSubmit={form.handleSubmit(handlePasswordChange)} className="space-y-8">
-                <FormField
-                  control={form.control}
-                  name="password"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Password</FormLabel>
-                      <FormControl>
-                        <Input placeholder="Enter new password" type="password" className="dark" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                 <Button
-              type="submit"
-              variant="secondary"
-              disabled={loading}
-              className="w-full font-medium"
-            >
-              {loading ? (
-                <>
-                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />{" "}
-                  changing...
-                </>
-              ) : (
-                "Change Password"
-              )}
-            </Button>
-              </form>
-            </FormProvider>
+                <form
+                  onSubmit={form.handleSubmit(handlePasswordChange)}
+                  className="space-y-8"
+                >
+                  <FormField
+                    control={form.control}
+                    name="password"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Password</FormLabel>
+                        <FormControl>
+                          <Input
+                            placeholder="Enter new password"
+                            type="password"
+                            className="dark"
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <Button
+                    type="submit"
+                    variant="secondary"
+                    disabled={loading}
+                    className="w-full font-medium"
+                  >
+                    {loading ? (
+                      <>
+                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />{" "}
+                        changing...
+                      </>
+                    ) : (
+                      "Change Password"
+                    )}
+                  </Button>
+                </form>
+              </FormProvider>
             )}
 
             {/* Accept Messages Toggle */}
-            {activeOption === "messages" && (
-             <div className="space-y-4">
-             <div className="flex items-center justify-between mb-4">
-               <label className="text-sm font-medium text-white">
-                 Accept Messages
-               </label>
-               <Switch
-                 checked={acceptMessages}
-                 onCheckedChange={handleAcceptMessagesChange}
-                 className="bg-gray-800"
-               />
-             </div>
-             <p className="text-sm text-[#9CA3AF]">
-               {acceptMessages ? "You are currently accepting messages." : "You are not accepting messages."}
-             </p>
-           </div>
-            )}
+            <div>
+              {activeOption === "messages" && (
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between mb-4">
+                    <label className="text-sm font-medium text-white">
+                      Accept Messages
+                    </label>
+                    <Switch
+                      checked={acceptMessages}
+                      onCheckedChange={handleAcceptMessagesChange}
+                      className="bg-gray-800"
+                    />
+                  </div>
+                  <p className="text-sm text-[#9CA3AF]">
+                    {acceptMessages
+                      ? "You are currently accepting messages."
+                      : "You are not accepting messages."}
+                  </p>
+                </div>
+              )}
+            </div>
           </CardContent>
         </Card>
       </div>
