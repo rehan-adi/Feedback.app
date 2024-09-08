@@ -65,7 +65,7 @@ const Settings = () => {
 
         <ul className="space-y-4">
           <li
-            className={`cursor-pointer text-[#9CA3AF] font-medium ${
+            className={`cursor-pointer text-[#9CA3AF] text-sm font-medium ${
               activeOption === "password" ? "text-blue-400" : ""
             }`}
             onClick={() => setActiveOption("password")}
@@ -73,7 +73,7 @@ const Settings = () => {
             Change Password
           </li>
           <li
-            className={`cursor-pointer text-[#9CA3AF] font-medium ${
+            className={`cursor-pointer text-[#9CA3AF] text-sm font-medium ${
               activeOption === "messages" ? "text-blue-400" : ""
             }`}
             onClick={() => setActiveOption("messages")}
