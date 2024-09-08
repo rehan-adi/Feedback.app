@@ -17,10 +17,8 @@ import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "../ui/
 const Settings = () => {
     
   const [loading, setLoading] = useState(false);
-  const [password, setPassword] = useState("");
   const [activeOption, setActiveOption] = useState("");
-
-  const [acceptMessages, setAcceptMessages] = useState(false);
+  const [acceptMessages, setAcceptMessages] = useState<boolean>(true);
 
   const form = useForm<z.infer<typeof changePasswordValidation>>({
     resolver: zodResolver(changePasswordValidation),
@@ -54,6 +52,22 @@ const Settings = () => {
         });
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleAcceptMessagesChange = async (checked: boolean) => {
+    setAcceptMessages(checked);
+    try {
+      const response = await axios.post("/api/accept-message", { acceptMessages: checked }); 
+
+      if (response.status === 200) {
+        toast.success("Accept Messages Settings Updated", {
+          duration: 2000,
+        });
+      }
+
+    } catch (error) {
+      console.error("Error updating accept messages:", error);
     }
   };
 
@@ -173,7 +187,7 @@ const Settings = () => {
                 </label>
                 <Switch
                   checked={acceptMessages}
-                  onCheckedChange={setAcceptMessages}
+                  onCheckedChange={handleAcceptMessagesChange}
                   className="bg-gray-800"
                 />
               </div>
