@@ -3,14 +3,15 @@
 import { z } from "zod";
 import axios from "axios";
 import { toast } from "sonner";
+import { useState } from "react";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
+import { Loader2 } from "lucide-react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, FormProvider, SubmitHandler } from "react-hook-form";
 import { FormControl, FormField, FormItem, FormLabel } from "../ui/form";
 import { updateProfileValidation } from "@/validation/profile.validation";
-import { useState } from "react";
-import { Loader2 } from "lucide-react";
+
 
 type UpdateProfileFormData = z.infer<typeof updateProfileValidation>;
 
