@@ -43,10 +43,14 @@ const Navbar = () => {
   const onProfile = (event: React.MouseEvent<HTMLDivElement>) => {
     event.stopPropagation();
     router.push("/profile");
-  }
+  };
+  const onSettings = (event: React.MouseEvent<HTMLDivElement>) => {
+    event.stopPropagation();
+    router.push("/settings");
+  };
   const onGithub = (event: React.MouseEvent<HTMLDivElement>) => {
-    window.open("https://github.com/rehan-adi/Next-Fullstack-App", "_blank")
-  }
+    window.open("https://github.com/rehan-adi/Next-Fullstack-App", "_blank");
+  };
 
   return (
     <div className="bg-black flex justify-between z-50 border-b border-white border-opacity-15 fixed top-0 items-center lg:px-24 px-6 text-white h-20 w-full ">
@@ -68,7 +72,7 @@ const Navbar = () => {
                 <span>Profile</span>
                 <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
               </DropdownMenuItem>
-              <DropdownMenuItem>
+              <DropdownMenuItem onClick={onSettings}>
                 <Settings className="mr-2 h-4 w-4" />
                 <span>Settings</span>
                 <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
