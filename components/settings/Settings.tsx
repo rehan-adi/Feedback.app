@@ -1,22 +1,58 @@
 "use client";
 
+import axios from "axios";
+import { toast } from "sonner";
 import { useState } from "react";
-import { Switch } from "../ui/switch";
 import { Input } from "../ui/input";
+import { Switch } from "../ui/switch";
 import { Button } from "../ui/button";
+import { Loader2 } from "lucide-react";
+import { Form, useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { Card, CardHeader, CardContent } from "../ui/card";
+import { FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "../ui/form";
 
 const Settings = () => {
-  const [activeOption, setActiveOption] = useState("");
-  const [acceptMessages, setAcceptMessages] = useState(false);
+    
+  const [loading, setLoading] = useState(false);
   const [password, setPassword] = useState("");
+  const [activeOption, setActiveOption] = useState("");
 
-  const handlePasswordChange = () => {
-    console.log("Password changed:", password);
-  };
+  const [acceptMessages, setAcceptMessages] = useState(false);
+
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      password: "",
+    },
+  })
 
   const handleLogout = () => {
     console.log("User logged out");
+  };
+
+  const handlePasswordChange = async () => {
+    setLoading(true);
+    try {
+      const response = await axios.post("/api/change-password", {password});
+
+      if(response.status === 200) {
+          toast.success("Password Changed Successfully", {
+            duration: 2000,
+          });
+      }
+
+
+    } catch (error: any) {
+        console.error(error);
+        const message =
+          error.response?.data?.message || "An error occurred. Please try again.";
+        toast.error("Failed to change Password", {
+          description: message,
+        });
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -93,28 +129,41 @@ const Settings = () => {
 
             {/* Change Password Form */}
             {activeOption === "password" && (
-              <div>
-                <label
-                  htmlFor="password"
-                  className="block text-sm font-medium text-white"
-                >
-                  Enter New Password
-                </label>
-                <Input
-                  id="password"
-                  type="password"
-                  className="mt-1 w-full bg-gray-800 border-gray-700 text-white"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  placeholder="Enter new password"
+              <Form {...form}>
+              <form onSubmit={form.handleSubmit(handlePasswordChange)} className="space-y-8">
+                <FormField
+                  control={form.control}
+                  name="password"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Username</FormLabel>
+                      <FormControl>
+                        <Input placeholder="shadcn" {...field} />
+                      </FormControl>
+                      <FormDescription>
+                        This is your public display name.
+                      </FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
                 />
-                <Button
-                  onClick={handlePasswordChange}
-                  className="mt-3 bg-blue-600 hover:bg-blue-700 w-full"
-                >
-                  Change Password
-                </Button>
-              </div>
+                 <Button
+              type="submit"
+              variant="default"
+              disabled={loading}
+              className="w-full"
+            >
+              {loading ? (
+                <>
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />{" "}
+                  changing...
+                </>
+              ) : (
+                "Change Password"
+              )}
+            </Button>
+              </form>
+            </Form>
             )}
 
             {/* Accept Messages Toggle */}
