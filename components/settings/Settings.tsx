@@ -8,11 +8,11 @@ import { Input } from "../ui/input";
 import { Switch } from "../ui/switch";
 import { Button } from "../ui/button";
 import { Loader2 } from "lucide-react";
-import { Form, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { FormProvider, useForm } from "react-hook-form";
 import { Card, CardHeader, CardContent } from "../ui/card";
 import { changePasswordValidation } from "@/validation/auth.validation";
-import { FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "../ui/form";
+import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "../ui/form";
 
 const Settings = () => {
     
@@ -33,17 +33,17 @@ const Settings = () => {
     console.log("User logged out");
   };
 
-  const handlePasswordChange = async () => {
+  const handlePasswordChange = async (data: z.infer<typeof changePasswordValidation>) => {
     setLoading(true);
     try {
-      const response = await axios.post("/api/change-password", {password});
+      const response = await axios.post("/api/change-password", {password: data.password});
 
       if(response.status === 200) {
           toast.success("Password Changed Successfully", {
             duration: 2000,
           });
+          form.reset();
       }
-
 
     } catch (error: any) {
         console.error(error);
@@ -131,29 +131,26 @@ const Settings = () => {
 
             {/* Change Password Form */}
             {activeOption === "password" && (
-              <Form {...form}>
+              <FormProvider {...form}>
               <form onSubmit={form.handleSubmit(handlePasswordChange)} className="space-y-8">
                 <FormField
                   control={form.control}
                   name="password"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Username</FormLabel>
+                      <FormLabel>Password</FormLabel>
                       <FormControl>
-                        <Input placeholder="shadcn" {...field} />
+                        <Input placeholder="Enter new password" type="password" className="dark" {...field} />
                       </FormControl>
-                      <FormDescription>
-                        This is your public display name.
-                      </FormDescription>
                       <FormMessage />
                     </FormItem>
                   )}
                 />
                  <Button
               type="submit"
-              variant="default"
+              variant="secondary"
               disabled={loading}
-              className="w-full"
+              className="w-full font-medium"
             >
               {loading ? (
                 <>
@@ -165,7 +162,7 @@ const Settings = () => {
               )}
             </Button>
               </form>
-            </Form>
+            </FormProvider>
             )}
 
             {/* Accept Messages Toggle */}
