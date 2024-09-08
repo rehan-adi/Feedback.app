@@ -29,3 +29,10 @@ export const signinValidation = z.object({
     .min(6, { message: "Password must be at least 6 characters" })
     .regex(/.+/, { message: "Password cannot be empty" }),
 });
+
+export const changePasswordValidation = z.object({
+  password: z
+    .string()
+    .min(6, { message: "Password must be at least 6 characters" })
+    .regex(/.+/, { message: "Password cannot be empty" }),
+});

@@ -1,5 +1,6 @@
 "use client";
 
+import { z } from "zod";
 import axios from "axios";
 import { toast } from "sonner";
 import { useState } from "react";
@@ -10,6 +11,7 @@ import { Loader2 } from "lucide-react";
 import { Form, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Card, CardHeader, CardContent } from "../ui/card";
+import { changePasswordValidation } from "@/validation/auth.validation";
 import { FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "../ui/form";
 
 const Settings = () => {
@@ -20,8 +22,8 @@ const Settings = () => {
 
   const [acceptMessages, setAcceptMessages] = useState(false);
 
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<z.infer<typeof changePasswordValidation>>({
+    resolver: zodResolver(changePasswordValidation),
     defaultValues: {
       password: "",
     },
