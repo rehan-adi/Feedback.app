@@ -64,7 +64,7 @@ const Signup = () => {
   };
 
   return (
-    <div className="w-full h-screen flex justify-center items-center text-white bg-black">
+    <div className="w-full h-screen flex justify-center items-center dark:text-white text-black dark:bg-black bg-white">
       <div className="p-8 max-w-md w-full mx-auto lg:border border-white border-opacity-10 rounded-lg shadow-md">
         <header className="text-center mb-8">
           <h1 className="text-2xl font-bold mb-5">Sign Up</h1>
@@ -83,7 +83,7 @@ const Signup = () => {
                   <FormControl>
                     <Input
                       placeholder="Enter your username"
-                      className="bg-black border-white text-white"
+                       className="dark:bg-black bg-white dark:border-white dark:border-opacity-15 dark:text-white border-black text-black"
                       aria-required="true"
                       {...field}
                     />
@@ -101,14 +101,14 @@ const Signup = () => {
                   <FormControl>
                     <Input
                       placeholder="Enter your email"
-                      className="bg-black border-white text-white"
+                       className="dark:bg-black bg-white dark:border-white dark:border-opacity-15 dark:text-white border-black text-black"
                       type="email"
                       aria-required="true"
                       {...field}
                     />
                   </FormControl>
                   <FormDescription>
-                    We’ll use this email for account verification.
+                    We’ll use this email for email verification.
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
@@ -123,7 +123,7 @@ const Signup = () => {
                   <FormControl>
                     <Input
                       placeholder="Enter your password"
-                      className="bg-black border-white text-white"
+                       className="dark:bg-black bg-white dark:border-white dark:border-opacity-15 dark:text-white border-black text-black"
                       type="password"
                       aria-required="true"
                       {...field}
