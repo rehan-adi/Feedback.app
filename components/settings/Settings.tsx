@@ -96,7 +96,7 @@ const Settings = () => {
   };
 
   return (
-    <div className="lg:flex h-screen bg-black text-white">
+    <div className="lg:flex h-screen dark:bg-black bg-white dark:text-white text-black">
 
       {/* sidebar for small screen */}
       <div className="lg:hidden py-6 mt-20 flex justify-center items-center">
@@ -121,13 +121,13 @@ const Settings = () => {
       </div>
 
       {/* Sidebar */}
-      <aside className="w-72 h-full bg-black fixed pt-28 left-0 border-r border-white border-opacity-15 hidden lg:flex flex-col justify-start p-5">
+      <aside className="w-72 h-full dark:bg-black bg-white fixed pt-28 left-0 border-r dark:border-white border-black dark:border-opacity-15 border-opacity-25 hidden lg:flex flex-col justify-start p-5">
         <h2 className="text-2xl font-semibold mb-9">Settings</h2>
 
         <ul className="space-y-4">
           <li
             className={`cursor-pointer text-[#9CA3AF] text-sm font-medium ${
-              activeOption === "password" ? "text-white" : ""
+              activeOption === "password" ? "dark:text-white text-black" : ""
             }`}
             onClick={() => setActiveOption("password")}
           >
@@ -135,7 +135,7 @@ const Settings = () => {
           </li>
           <li
             className={`cursor-pointer text-[#9CA3AF] text-sm font-medium ${
-              activeOption === "messages" ? "text-white" : ""
+              activeOption === "messages" ? "dark:text-white text-black" : ""
             }`}
             onClick={() => setActiveOption("messages")}
           >
@@ -152,7 +152,7 @@ const Settings = () => {
 
       {/* Main Content */}
       <div className="flex-1 flex items-center lg:px-0 px-2 lg:mt-0 mt-2 justify-center">
-        <Card className="lg:w-96 w-full bg-black border border-white border-opacity-15 text-white shadow-lg">
+        <Card className="lg:w-96 w-full dark:bg-black bg-white border dark:border-white border-black dark:border-opacity-15 border-opacity-25 dark:text-white text-black shadow-lg">
           <CardHeader className="text-center text-xl font-bold">
             {activeOption === "" && "Settings Overview"}
             {activeOption === "password" && "Change Password"}
@@ -162,25 +162,25 @@ const Settings = () => {
           <CardContent>
             {activeOption === "" && (
               <div className="text-center">
-                <p className="mb-4 text-[#9CA3AF] text-base font-medium">
+                <p className="mb-4 dark:text-[#9CA3AF] text-black text-base font-medium">
                   Here you can modify your account settings. You can change your
                   password or toggle whether to accept messages. Select an
                   option from the left.
                 </p>
-                <p className="mb-4 text-[#9CA3AF] text-base font-medium">
+                <p className="mb-4 dark:text-[#9CA3AF] text-black text-base font-medium">
                   Note: Changing your password will log you out from all other
                   devices.
                 </p>
-                <p className="mb-4 text-[#9CA3AF] text-base font-medium">
+                <p className="mb-4 dark:text-[#9CA3AF] text-black text-base font-medium">
                   You can also update your profile information, adjust your
                   privacy settings, and configure notification preferences.
                 </p>
 
                 <div className="mt-8 text-left space-y-4">
-                  <h3 className="text-lg font-semibold text-white">
+                  <h3 className="text-lg font-semibold dark:text-white text-black">
                     Other Settings
                   </h3>
-                  <ul className="list-disc list-inside text-[#9CA3AF]">
+                  <ul className="list-disc list-inside dark:text-[#9CA3AF] text-black">
                     <li className="text-base font-medium">
                       Profile Settings: Update your profile picture and personal
                       details.
@@ -207,7 +207,7 @@ const Settings = () => {
                           <Input
                             placeholder="Enter new password"
                             type="password"
-                            className="dark"
+                            className=""
                             {...field}
                           />
                         </FormControl>
@@ -217,7 +217,7 @@ const Settings = () => {
                   />
                   <Button
                     type="submit"
-                    variant="secondary"
+                    variant="default"
                     disabled={loading}
                     className="w-full font-medium"
                   >
@@ -239,7 +239,7 @@ const Settings = () => {
               {activeOption === "messages" && (
                 <div className="space-y-4">
                   <div className="flex items-center justify-between mb-4">
-                    <label className="text-sm font-medium text-white">
+                    <label className="text-sm font-medium dark:text-white text-black">
                       Accept Messages
                     </label>
                     <Switch
@@ -248,7 +248,7 @@ const Settings = () => {
                       className="bg-gray-800"
                     />
                   </div>
-                  <p className="text-sm text-[#9CA3AF]">
+                  <p className="text-sm dark:text-[#9CA3AF] text-gray-600">
                     {acceptMessages
                       ? "You are currently accepting messages."
                       : "You are not accepting messages."}
