@@ -54,7 +54,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="dark:bg-black bg-white flex justify-between z-50 border-b dark:border-white border-black border-opacity-25 dark:border-opacity-15 fixed top-0 items-center lg:px-24 px-6 dark:text-white text-black h-20 w-full ">
+    <nav className="dark:bg-black bg-white flex justify-between z-50 border-b dark:border-white border-black border-opacity-25 dark:border-opacity-15 fixed top-0 items-center lg:px-20 px-6 dark:text-white text-black h-20 w-full ">
       {/* Logo */}
       <div>
       <svg
@@ -71,9 +71,6 @@ const Navbar = () => {
       </svg>
       </div>
       <div className="flex gap-4 items-center">
-        <div>
-          <ThemeToggle />
-        </div>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Avatar>
@@ -108,8 +105,11 @@ const Navbar = () => {
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
+        <div>
+          <ThemeToggle />
+        </div>
       </div>
-    </div>
+    </nav>
   );
 };
 
