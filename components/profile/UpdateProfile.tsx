@@ -57,7 +57,7 @@ const UpdateProfile = () => {
               <FormControl>
                 <Input
                   placeholder="Enter your username"
-                  className="bg-black border-white text-white"
+                  className="dark:bg-black dark:border-white border border-black text-black dark:text-white"
                   {...field}
                 />
               </FormControl>

@@ -2,8 +2,9 @@
 
 import axios from "axios";
 import { toast } from "sonner";
-import { Github, LogOut, Settings, User } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { Github, LogOut, Settings, User } from "lucide-react";
+import ThemeToggle from "../ThemeToggle";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   DropdownMenu,
@@ -53,9 +54,12 @@ const Navbar = () => {
   };
 
   return (
-    <div className="bg-black flex justify-between z-50 border-b border-white border-opacity-15 fixed top-0 items-center lg:px-24 px-6 text-white h-20 w-full ">
+    <div className="dark:bg-black bg-white flex justify-between z-50 border-b dark:border-white border-black border-opacity-25 dark:border-opacity-15 fixed top-0 items-center lg:px-24 px-6 dark:text-white text-black h-20 w-full ">
       <h1>Logo</h1>
-      <div>
+      <div className="flex gap-4 items-center">
+        <div>
+           <ThemeToggle />
+        </div>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Avatar>
@@ -63,7 +67,7 @@ const Navbar = () => {
               <AvatarFallback>CN</AvatarFallback>
             </Avatar>
           </DropdownMenuTrigger>
-          <DropdownMenuContent className="w-52 lg:mr-14 mr-7 dark">
+          <DropdownMenuContent className="w-52 lg:mr-14 mr-7">
             <DropdownMenuLabel>My Account</DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
