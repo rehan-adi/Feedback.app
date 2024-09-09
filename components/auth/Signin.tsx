@@ -5,6 +5,7 @@ import axios from "axios";
 import Link from "next/link";
 import { toast } from "sonner";
 import { useState } from "react";
+import { Github } from 'lucide-react';
 import { signIn } from "next-auth/react";
 import { Loader2 } from "lucide-react";
 import { useForm } from "react-hook-form";
@@ -157,20 +158,12 @@ const Signin = () => {
               {githubLoading ? (
                 <>
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  <img
-                    src="/images/github.png"
-                    alt="GitHub logo"
-                    className="w-5 h-5 mr-2"
-                  />
+                  <Github className="text-xs mr-3 dark:text-white text-black"/>
                   Sign in with GitHub.....
                 </>
               ) : (
                 <>
-                  <img
-                    src="/images/github.png"
-                    alt="GitHub logo"
-                    className="w-5 h-5 mr-2"
-                  />
+                  <Github className="text-xs mr-3 dark:text-white text-black"/>
                   Sign in with GitHub
                 </>
               )}
