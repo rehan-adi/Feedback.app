@@ -55,10 +55,24 @@ const Navbar = () => {
 
   return (
     <div className="dark:bg-black bg-white flex justify-between z-50 border-b dark:border-white border-black border-opacity-25 dark:border-opacity-15 fixed top-0 items-center lg:px-24 px-6 dark:text-white text-black h-20 w-full ">
-      <h1>Logo</h1>
+      {/* Logo */}
+      <div>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        className="h-7 w-7"
+      >
+        <path d="M15 6v12a3 3 0 1 0 3-3H6a3 3 0 1 0 3 3V6a3 3 0 1 0-3 3h12a3 3 0 1 0-3-3"></path>
+      </svg>
+      </div>
       <div className="flex gap-4 items-center">
         <div>
-           <ThemeToggle />
+          <ThemeToggle />
         </div>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
