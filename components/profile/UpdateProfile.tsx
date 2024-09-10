@@ -12,7 +12,6 @@ import { useForm, FormProvider, SubmitHandler } from "react-hook-form";
 import { FormControl, FormField, FormItem, FormLabel } from "../ui/form";
 import { updateProfileValidation } from "@/validation/profile.validation";
 
-
 type UpdateProfileFormData = z.infer<typeof updateProfileValidation>;
 
 const UpdateProfile = () => {
@@ -22,10 +21,15 @@ const UpdateProfile = () => {
     resolver: zodResolver(updateProfileValidation),
     defaultValues: {
       username: "",
+      githubLink: "",
+      twitterLink: "",
     },
   });
+  
 
   const onSubmit: SubmitHandler<UpdateProfileFormData> = async (data) => {
+    console.log(data);
+    
     setLoading(true);
     try {
       const response = await axios.put("/api/update-profile", data);
@@ -47,7 +51,7 @@ const UpdateProfile = () => {
 
   return (
     <FormProvider {...methods}>
-      <form onSubmit={methods.handleSubmit(onSubmit)}>
+      <form className="space-y-4" onSubmit={methods.handleSubmit(onSubmit)}>
         <FormField
           control={methods.control}
           name="username"
@@ -64,7 +68,39 @@ const UpdateProfile = () => {
             </FormItem>
           )}
         />
-        <div className="flex justify-end mt-5 space-x-2">
+        <FormField
+          control={methods.control}
+          name="githubLink"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>GitHub</FormLabel>
+              <FormControl>
+                <Input
+                  placeholder="Add yout github"
+                  className="dark:bg-black dark:border-white border border-black text-black dark:text-white"
+                  {...field}
+                />
+              </FormControl>
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={methods.control}
+          name="twitterLink"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Twitter</FormLabel>
+              <FormControl>
+                <Input
+                  placeholder="Add yout Twitter"
+                  className="dark:bg-black dark:border-white border border-black text-black dark:text-white"
+                  {...field}
+                />
+              </FormControl>
+            </FormItem>
+          )}
+        />
+        <div className="flex justify-end mt-7 space-x-2">
           <Button type="submit">
             {loading ? (
               <>

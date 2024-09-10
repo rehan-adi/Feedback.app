@@ -3,8 +3,8 @@
 import { z } from "zod";
 import axios from "axios";
 import { toast } from "sonner";
-import { Edit } from "lucide-react";
 import { Button } from "../ui/button";
+import { Edit, Github, TwitterIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 import UpdateProfile from "./UpdateProfile";
 import { Loader2, User } from "lucide-react";
@@ -126,13 +126,33 @@ const Profile = () => {
               <div className="flex flex-col gap-2">
                 <h2 className="text-sm font-medium">Email Verified</h2>
                 <Badge
-                  variant={
-                    profileData?.isVerified ? "default" : "destructive"
-                  }
+                  variant={profileData?.isVerified ? "default" : "destructive"}
                   className="w-[68px]"
                 >
                   {profileData?.isVerified ? "Verified" : "Not Verified"}
                 </Badge>
+              </div>
+              <div className="flex items-center gap-5 mt-4">
+                {profileData?.githubLink && (
+                  <a
+                    href={profileData.githubLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-1 text-blue-500 hover:underline"
+                  >
+                    <Github className="w-6 h-6" />
+                  </a>
+                )}
+                {profileData?.twitterLink && (
+                  <a
+                    href={profileData.twitterLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-1 text-blue-500 hover:underline"
+                  >
+                    <TwitterIcon className="w-6 h-6" />
+                  </a>
+                )}
               </div>
             </div>
           </div>
