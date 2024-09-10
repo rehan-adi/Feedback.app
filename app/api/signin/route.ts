@@ -1,7 +1,8 @@
-import prisma from "@/lib/prisma";
-import { NextRequest, NextResponse } from "next/server";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import prisma from "@/lib/prisma";
+import { v4 as uuidv4 } from 'uuid'
+import { NextRequest, NextResponse } from "next/server";
 import { signinValidation } from "@/validation/auth.validation";
 
 export const POST = async (req: NextRequest) => {
@@ -43,8 +44,15 @@ export const POST = async (req: NextRequest) => {
       );
     }
 
+    const deviceId = uuidv4();
+
+    await prisma.user.update({
+      where: { id: existingUser.id },
+      data: { deviceId },
+    });
+
     const token = jwt.sign(
-      { id: existingUser.id, email: existingUser.email },
+      { id: existingUser.id, email: existingUser.email, deviceId: deviceId },
       process.env.JWT_SECRET!,
       { expiresIn: "1d" }
     );
