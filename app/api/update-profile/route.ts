@@ -41,12 +41,20 @@ export const PUT = async (req: NextRequest) => {
     const body = await req.json();
     const parseData = updateProfileValidation.parse(body);
 
-    const { username } = parseData;
+    const { username, githubLink, twitterLink } = parseData;
+    console.log("Parsed data:", { username, githubLink, twitterLink });
 
-    await prisma.user.update({
+    const updatesdata = await prisma.user.update({
       where: { id: userId },
-      data: { username },
+      data: {
+        username: username ?? undefined,
+        githubLink: githubLink ?? undefined,
+        twitterLink: twitterLink ?? undefined,
+      },
     });
+
+    console.log(updatesdata);
+    
 
     return NextResponse.json(
       {
