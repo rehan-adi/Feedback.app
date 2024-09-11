@@ -28,13 +28,19 @@ export const POST = async (req: NextRequest) => {
       .padStart(6, "0");
     const verifyCodeExpiry = 3600;
 
-    await redis.set(`verifyCode:${email}`, verifyCode, "EX", verifyCodeExpiry);
+    await redis.set(
+      verifyCode,
+      verifyCode,
+      "EX",
+      verifyCodeExpiry
+    );
 
     const user = await prisma.user.create({
       data: {
         username,
         email,
         password: hashedPassword,
+        verifyCode,
       },
     });
 
