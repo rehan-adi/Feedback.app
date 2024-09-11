@@ -11,13 +11,6 @@ export const POST = async (req: NextRequest) => {
 
     const { verifyCode } = parsedData;
 
-    if (!verifyCode) {
-      return NextResponse.json(
-        { message: "Verification code is missing" },
-        { status: 400 }
-      );
-    }
-
     const storedData = await redis.get(verifyCode);
 
     if (!storedData) {
