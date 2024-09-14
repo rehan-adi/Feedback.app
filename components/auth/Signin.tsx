@@ -5,7 +5,7 @@ import axios from "axios";
 import Link from "next/link";
 import { toast } from "sonner";
 import { useState } from "react";
-import { Github } from 'lucide-react';
+import { Github } from "lucide-react";
 import { signIn } from "next-auth/react";
 import { Loader2 } from "lucide-react";
 import { useForm } from "react-hook-form";
@@ -74,7 +74,6 @@ const Signin = () => {
       setGithubLoading(false);
     }
   };
-  
 
   return (
     <div className="w-full h-screen flex justify-center items-center dark:text-white text-black dark:bg-black bg-white">
@@ -158,12 +157,12 @@ const Signin = () => {
               {githubLoading ? (
                 <>
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  <Github className="text-xs mr-3 dark:text-white text-black"/>
+                  <Github className="text-xs mr-3 dark:text-white text-black" />
                   Sign in with GitHub.....
                 </>
               ) : (
                 <>
-                  <Github className="text-xs mr-3 dark:text-white text-black"/>
+                  <Github className="text-xs mr-3 dark:text-white text-black" />
                   Sign in with GitHub
                 </>
               )}
@@ -172,7 +171,7 @@ const Signin = () => {
         </Form>
         <div className="text-center mt-8">
           <p className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
-            Don't have a account?{" "}
+            Don&apos;t have an account?{" "}
             <Link href="/signup" className="underline underline-offset-2">
               Sign Up
             </Link>
