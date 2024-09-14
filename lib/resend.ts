@@ -6,6 +6,8 @@ if (!RESEND_API_KEY) {
   throw new Error("RESEND_API_KEY is not defined in the environment variables.");
 }
 
-export const resend = new Resend(RESEND_API_KEY);
+const resend = new Resend(RESEND_API_KEY);
+
+export default resend;
 
 console.log("Resend instance created with API key.");

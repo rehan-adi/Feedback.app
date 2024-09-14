@@ -1,4 +1,4 @@
-import { resend } from "@/lib/resend"
+import resend  from "@/lib/resend"
 import WelcomeEmailTemplate from "@/emails/WelcomeEmailTemplate"
 import { NextResponse } from "next/server";
 
