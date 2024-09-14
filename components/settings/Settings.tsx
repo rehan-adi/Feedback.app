@@ -8,6 +8,7 @@ import { Switch } from "../ui/switch";
 import { Button } from "../ui/button";
 import { Loader2 } from "lucide-react";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, useForm } from "react-hook-form";
 import { Card, CardHeader, CardContent } from "../ui/card";
@@ -21,6 +22,8 @@ import {
 } from "../ui/form";
 
 const Settings = () => {
+  const router = useRouter();
+
   const [loading, setLoading] = useState(false);
   const [activeOption, setActiveOption] = useState("");
   const [acceptMessages, setAcceptMessages] = useState<boolean>(true);
@@ -32,8 +35,29 @@ const Settings = () => {
     },
   });
 
-  const handleLogout = () => {
-    console.log("User logged out");
+  const onLogout = async () => {
+    setLoading(true);
+    try {
+      const response = await axios.post("/api/logout");
+      if (response.status === 200) {
+        toast.success("Logout successful", {
+          description: response.data.message || "You have been logged out.",
+          duration: 2000,
+        });
+        router.push("/signin");
+      }
+    } catch (error: any) {
+      console.error(error);
+      toast.error("Logout failed", {
+        description:
+          error?.response?.data?.message ||
+          "An error occurred. Please try again.",
+        duration: 3000,
+      });
+      setLoading(false);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handlePasswordChange = async (
@@ -97,7 +121,6 @@ const Settings = () => {
 
   return (
     <div className="lg:flex h-screen dark:bg-black bg-white dark:text-white text-black">
-
       {/* sidebar for small screen */}
       <div className="lg:hidden py-6 mt-20 flex justify-center items-center">
         <ul className="flex gap-4">
@@ -144,8 +167,14 @@ const Settings = () => {
         </ul>
 
         <div className="mt-auto">
-          <Button onClick={handleLogout} className="w-full" variant="default">
-            Logout
+          <Button onClick={onLogout} className="w-full" variant="default">
+          {loading ? (
+              <>
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" /> log out...
+              </>
+            ) : (
+              "Logout"
+            )}
           </Button>
         </div>
       </aside>
