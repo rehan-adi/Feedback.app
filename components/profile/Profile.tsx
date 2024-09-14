@@ -103,7 +103,7 @@ const Profile = () => {
                   <DialogHeader>
                     <DialogTitle>Edit Profile</DialogTitle>
                     <DialogDescription>
-                      Here you can edit your profile details.
+                      Here you can edit your profile details. But you need to add all fields
                     </DialogDescription>
                   </DialogHeader>
                   <UpdateProfile />
