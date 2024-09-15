@@ -3,7 +3,7 @@ import { User, MessageCircle } from 'lucide-react';
 
 const Sidebar = () => {
   return (
-    <div className="w-56 h-[89vh] fixed left-0 mt-20 dark:bg-black border-r dark:border-white dark:border-opacity-15 bg-white dark:text-white text-black">
+    <div className="w-[20vw] h-[89vh] fixed left-0 mt-20 dark:bg-black border-r dark:border-white dark:border-opacity-15 bg-white dark:text-white text-black">
       <div className="p-4">
         <h2 className="text-lg font-medium">Dashboard</h2>
         <ul className="mt-6">
