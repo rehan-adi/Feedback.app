@@ -82,7 +82,7 @@ const Profile = () => {
               {profileData?.email}
             </h1>
           </div>
-          <div className="dark:bg-black rounded-2xl border dark:border-white dark:border-opacity-15 border-black border-opacity-25 h-[56vh] lg:h-[75vh] w-full lg:w-[45vw]">
+          <div className="dark:bg-black rounded-2xl border dark:border-white dark:border-opacity-15 border-black border-opacity-25 h-[57vh] lg:h-[75vh] w-full lg:w-[45vw]">
             <div className="w-full border-b py-6 px-6 gap-2 flex items-center justify-between border-white border-opacity-20">
               <div>
                 <div className="gap-2 flex items-center">
@@ -110,7 +110,7 @@ const Profile = () => {
                 </DialogContent>
               </Dialog>
             </div>
-            <div className="flex flex-col gap-5 px-6 py-8">
+            <div className="flex flex-col gap-5 px-6 py-4">
               <div className="flex flex-col gap-1">
                 <h2 className="text-sm font-medium">Username</h2>
                 <p className="text-sm font-semibold text-[#9CA3AF]">
