@@ -19,6 +19,7 @@ model User {
   createdAt           DateTime @default(now())
   updatedAt           DateTime @updatedAt
   messages            Message[]
+  sessions            Session[]
   githubLink          String?
   twitterLink         String?
 
@@ -31,4 +32,16 @@ model Message {
   createdAt    DateTime   @default(now())
   userId       String
   user         User       @relation(fields: [userId], references: [id])
+}
+
+model Session {
+  id             String   @id @default(uuid())
+  userId         String
+  user           User     @relation(fields: [userId], references: [id])
+  token          String   @unique
+  expiresAt      DateTime
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@index([userId])
 }
