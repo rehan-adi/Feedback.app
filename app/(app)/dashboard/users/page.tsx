@@ -64,7 +64,7 @@ const UsersPage = () => {
           <Loader2 className="animate-spin m-72 h-7 w-7" />
         </>
       ) : (
-        <Table className="w-full max-w-screen-lg mx-auto">
+        <Table className="w-full max-w-screen-xl mx-auto">
           <TableCaption className="mt-10">A list of registered users.</TableCaption>
           <TableHeader>
             <TableRow>

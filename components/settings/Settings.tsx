@@ -144,7 +144,7 @@ const Settings = () => {
       </div>
 
       {/* Sidebar */}
-      <aside className="w-72 h-full dark:bg-black bg-white fixed pt-28 left-0 border-r dark:border-white border-black dark:border-opacity-15 border-opacity-25 hidden lg:flex flex-col justify-start p-5">
+      <aside className="w-[243px] h-full dark:bg-black bg-white fixed pt-28 left-0 border-r dark:border-white border-black dark:border-opacity-15 border-opacity-25 hidden lg:flex flex-col justify-start p-5">
         <h2 className="text-2xl font-semibold mb-9">Settings</h2>
 
         <ul className="space-y-4">
