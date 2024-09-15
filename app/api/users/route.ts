@@ -1,4 +1,5 @@
 import prisma from "@/lib/prisma";
+import { revalidateTag } from "next/cache";
 import { NextRequest, NextResponse } from "next/server";
 
 export const GET = async (req: NextRequest) => {
@@ -15,12 +16,15 @@ export const GET = async (req: NextRequest) => {
       },
     });
 
+    // Revalidate cache for the 'users' tag
+    revalidateTag("users");
+
     return NextResponse.json(
       { success: true, data: users, message: "Showing all users" },
       {
         status: 200,
         headers: {
-          "Cache-Control": "no-store", // Prevents any caching, always fetches fresh data
+          "Cache-Control": "public, max-age=60", // Cache for 60 seconds
         },
       }
     );
