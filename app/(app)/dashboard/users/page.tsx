@@ -58,21 +58,21 @@ const UsersPage = () => {
   }, []);
 
   return (
-    <div className="mt-20 flex justify-center items-center ml-60 px-1">
+    <div className="mt-20 flex justify-center items-center lg:ml-60 px-1">
       {loading ? (
         <>
           <Loader2 className="animate-spin m-72 h-7 w-7" />
         </>
       ) : (
-        <Table className="w-full max-w-screen-xl mx-auto">
+        <Table className="lg:max-w-screen-xl overflow-x-hidden w-full mx-auto">
           <TableCaption className="mt-10">A list of registered users.</TableCaption>
           <TableHeader>
             <TableRow>
-              <TableHead className="w-[150px]">Username</TableHead>
-              <TableHead className="w-[150px]">Email</TableHead>
-              <TableHead className="w-[150px]">Profile</TableHead>
-              <TableHead className="w-[150px]">Verified</TableHead>
-              <TableHead className="w-[150px]">Accept Message</TableHead>
+              <TableHead className="lg:w-[150px]">Username</TableHead>
+              <TableHead className="lg:w-[150px]">Email</TableHead>
+              <TableHead className="lg:w-[150px]">Profile</TableHead>
+              <TableHead className="lg:w-[150px]">Verified</TableHead>
+              <TableHead className="lg:w-[150px]">Accept Message</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
