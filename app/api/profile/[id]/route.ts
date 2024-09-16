@@ -7,7 +7,7 @@ export const  GET = async(req: Request, { params }: { params: { id: string } }) 
     where: { id: params.id },
   });
 
-  if (!user) return NextResponse.json({ error: 'User not found' }, { status: 404 });
+  if (!user) return NextResponse.json({ error: 'User profile not found' }, { status: 404 });
 
   return NextResponse.json(user);
 }
