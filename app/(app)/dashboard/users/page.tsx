@@ -82,7 +82,7 @@ const UsersPage = () => {
                 <TableCell>{user.email}</TableCell>
                 <TableCell>
                   <Link
-                    href={`/profile/${user.id}`}
+                    href={`/dashboard/users/${user.id}`}
                     className="text-blue-500 hover:underline"
                   >
                     View Profile

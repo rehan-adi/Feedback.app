@@ -1,29 +1,42 @@
 "use client"
 
-import axios from 'axios';
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useEffect, useState } from "react";
+import { useParams } from "next/navigation";
+import axios from "axios";
 
-const UserProfilePage = ({ params }: { params: { id: string } }) => {
+const UserProfile = () => {
+  const { id } = useParams();
   const [user, setUser] = useState(null);
-
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchUser = async () => {
-      const response = await axios.get(`/api/users/${params.id}`);
-      setUser(response.data);
+      try {
+        const response = await axios.get(`/api/users/${id}`);
+        setUser(response.data);
+        console.log(response.data);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching user:", error);
+        setLoading(false);
+      }
     };
-    fetchUser();
-  }, [params.id]);
 
-  if (!user) return <div>Loading...</div>;
+    fetchUser();
+  }, [id]);
+
+  if (loading) return <p>Loading...</p>;
+
+  if (!user) return <p>User not found</p>;
 
   return (
     <div>
       <h1>{user}'s Profile</h1>
-      <p>Other details...</p>
+      {/* <p>Email: {user.email}</p>
+      <p>Verified: {user.isVerified ? "Yes" : "No"}</p> */}
+      {/* Display more user information as needed */}
     </div>
   );
 };
 
-export default UserProfilePage;
+export default UserProfile;
