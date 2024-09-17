@@ -26,7 +26,7 @@ export const GET = async (
       );
     }
 
-    return NextResponse.json(user);
+    return NextResponse.json({ success: true, data: user, message: 'Showing User profile'}, { status: 200 });
   } catch (error: any) {
     console.error("Error retrieving user profile:", {
       message: error.message,
