@@ -19,6 +19,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import Footer from "../common/Footer";
 
 type ProfileFormData = z.infer<typeof profileValidation>;
 
@@ -58,7 +59,9 @@ const Profile = () => {
   }, []);
 
   return (
-    <div className="w-full min-h-screen flex justify-center lg:flex-row py-8 lg:px-0 px-4 flex-col mt-2 gap-3 items-center dark:text-white dark:bg-black bg-white text-black">
+    
+    <>
+      <div className="w-full min-h-screen flex justify-center lg:flex-row py-8 lg:px-0 px-4 flex-col mt-2 gap-3 items-center dark:text-white dark:bg-black bg-white text-black">
       {loading ? (
         <div className="flex items-center justify-center w-full h-full">
           <Loader2 className="h-8 w-8 animate-spin" />
@@ -156,6 +159,8 @@ const Profile = () => {
         </>
       )}
     </div>
+    <Footer />
+    </>
   );
 };
 
