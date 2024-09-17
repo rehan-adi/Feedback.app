@@ -9,6 +9,7 @@ import { Badge } from "@/components/ui/badge";
 import { Github, TwitterIcon } from "lucide-react";
 import { profileData } from "@/validation/profile.validation";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import Footer from "../common/Footer";
 
 const UsersProfile = () => {
 
@@ -43,6 +44,7 @@ const UsersProfile = () => {
   }, [id]);
 
   return (
+    <>
     <div className="w-full min-h-screen flex justify-center lg:flex-row py-8 lg:px-0 px-4 flex-col mt-2 gap-3 items-center dark:text-white dark:bg-black bg-white text-black">
       {loading ? (
         <div className="flex items-center justify-center w-full h-full">
@@ -125,6 +127,8 @@ const UsersProfile = () => {
         </>
       )}
     </div>
+    <Footer />
+    </>
   );
 };
 
