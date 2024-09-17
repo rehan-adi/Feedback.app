@@ -62,9 +62,6 @@ const Profile = () => {
       {loading ? (
         <div className="flex items-center justify-center w-full h-full">
           <Loader2 className="h-8 w-8 animate-spin" />
-          <span className="ml-3 text-white text-sm font-medium">
-            Loading profile...
-          </span>
         </div>
       ) : (
         <>
