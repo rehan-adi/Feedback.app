@@ -21,10 +21,19 @@ const UserProfile = () => {
       setLoading(true);
       try {
         const response = await axios.get(`/api/profile/${id}`);
-        setUser(response.data);
-        setLoading(false);
-      } catch (error) {
+        if(response.status === 200) {
+          setUser(response.data.data);
+          setLoading(false);
+          toast.success(response.data.message, {
+            duration: 2000,
+          });
+        }
+      } catch (error: any) {
         console.error("Error fetching user:", error);
+        toast.error("Failed to fetch user", {
+          description: error.response?.data?.message || "An error occurred.",
+          duration: 2000,
+        });
       } finally {
         setLoading(false);
       }
@@ -38,9 +47,6 @@ const UserProfile = () => {
       {loading ? (
         <div className="flex items-center justify-center w-full h-full">
           <Loader2 className="h-8 w-8 animate-spin" />
-          <span className="ml-3 text-white text-sm font-medium">
-            Loading profile...
-          </span>
         </div>
       ) : (
         <>
