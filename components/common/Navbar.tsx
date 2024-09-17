@@ -1,6 +1,7 @@
 "use client";
 
 import axios from "axios";
+import Link from "next/link";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { Github, LogOut, Settings, User } from "lucide-react";
@@ -57,6 +58,7 @@ const Navbar = () => {
     <nav className="dark:bg-black bg-white flex justify-between z-50 border-b dark:border-white border-black border-opacity-25 dark:border-opacity-15 fixed top-0 items-center lg:px-20 px-6 dark:text-white text-black h-20 w-full ">
       {/* Logo */}
       <div>
+      <Link href="/dashboard">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
@@ -69,6 +71,7 @@ const Navbar = () => {
       >
         <path d="M15 6v12a3 3 0 1 0 3-3H6a3 3 0 1 0 3 3V6a3 3 0 1 0-3 3h12a3 3 0 1 0-3-3"></path>
       </svg>
+      </Link>
       </div>
       <div className="flex gap-4 items-center">
         <DropdownMenu>
