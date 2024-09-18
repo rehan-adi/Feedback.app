@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { User, MessageCircle } from 'lucide-react';
+import { User } from 'lucide-react';
 
 const Sidebar = () => {
   return (
@@ -11,12 +11,6 @@ const Sidebar = () => {
             <Link href="/dashboard/users" className="flex items-center p-2 pr-6 hover:bg-gray-900 rounded">
               <User className="w-5 h-5 mr-2" />
               Users
-            </Link>
-          </li>
-          <li>
-            <Link href="/dashboard/messages" className="flex items-center p-2 pr-6 hover:bg-gray-900 rounded">
-              <MessageCircle className="w-5 h-5 mr-2" />
-              Messages
             </Link>
           </li>
         </ul>
