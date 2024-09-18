@@ -51,6 +51,15 @@ const UsersProfile = () => {
   };
 
   const handleSubmitFeedback = async () => {
+
+    if (!feedback.trim()) { 
+      toast.error("Feedback cannot be empty.", {
+        duration: 2000,
+      });
+      return;
+    }
+
+    
     setLoading(true);
     
     try {
@@ -77,12 +86,6 @@ const UsersProfile = () => {
   return (
     <>
       <div className="w-full min-h-screen flex justify-center lg:flex-row py-8 lg:px-0 px-4 flex-col mt-2 gap-3 items-center dark:text-white dark:bg-black bg-white text-black">
-        {loading ? (
-          <div className="flex items-center justify-center w-full h-full">
-            <Loader2 className="h-8 w-8 animate-spin" />
-          </div>
-        ) : (
-          <>
             <div className="dark:bg-[#1d26435c] bg-white py-5 flex justify-start border border-black border-opacity-25 items-center flex-col px-4 h-[35vh] lg:h-[75vh] lg:mt-0 mt-16 rounded-2xl w-full lg:w-[25vw]">
               <Avatar className="lg:mt-7 mt-2 w-24 h-24">
                 <AvatarImage src="https://github.com/shadcn.png" />
@@ -175,12 +178,14 @@ const UsersProfile = () => {
                       />
                       <Button
                         variant="default"
+                        disabled={loading || !feedback.trim()} 
                         onClick={handleSubmitFeedback}
                         className="mt-4"
                       >
                         { loading ? 
                         <>
                         <Loader2 className="h-6 w-6 animate-spin" />
+                        Submiting...
                         </>
                          : "Submit" }
                       </Button>
@@ -189,8 +194,6 @@ const UsersProfile = () => {
                 )}
               </div>
             </div>
-          </>
-        )}
       </div>
       <Footer />
     </>
