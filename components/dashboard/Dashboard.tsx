@@ -5,9 +5,19 @@ import { toast } from "sonner";
 import { Loader2 } from "lucide-react";
 import { useEffect, useState } from "react";
 
+
+interface Message {
+  id: string;
+  content: string;
+  createdAt: string;
+  sender: {
+    username: string;
+  };
+}
+
 const Dashboard = () => {
   const [loading, setLoading] = useState(false);
-  const [messages, setMessages] = useState<any[]>([]);
+  const [messages, setMessages] = useState<Message[]>([]);
 
   useEffect(() => {
     const fetchMessages = async () => {
@@ -17,16 +27,16 @@ const Dashboard = () => {
 
         if (response.status === 200) {
           setMessages(response.data.message);
+
           toast.success("Messages fetched successfully", {
             duration: 2000,
           });
         }
       } catch (error: any) {
         console.error("Failed to fetch messages", error);
-        toast.error("", {
-          description:
-            error?.response?.data?.message ||
-            "An error occurred. Please try again.",
+        const message =
+          error?.response?.data?.message || "An unexpected error occurred.";
+        toast.error(message, {
           duration: 3000,
         });
       } finally {
@@ -53,7 +63,7 @@ const Dashboard = () => {
                 >
                   <div className="flex justify-between items-center mb-2">
                     <span className="font-semibold text-gray-800 dark:text-gray-100">
-                      {message.user.username || "Unknown User"}
+                      {message.sender.username || "Unknown User"}
                     </span>
                     <span className="text-sm text-gray-500 dark:text-gray-400">
                       {new Date(message.createdAt).toLocaleString()}
@@ -66,11 +76,7 @@ const Dashboard = () => {
               ))
             ) : (
               <div className="flex justify-center items-center mt-20 flex-col gap-10">
-                <img
-                  src="empty.svg"
-                  alt="img"
-                  className="w-72 lg:w-96"
-                />
+                <img src="empty.svg" alt="No messages" className="w-72 lg:w-96" />
                 <p className="text-gray-700 text-center dark:text-gray-300">
                   No messages found.
                 </p>
