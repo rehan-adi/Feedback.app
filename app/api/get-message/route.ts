@@ -38,12 +38,12 @@ export const GET = async (req: NextRequest) => {
     const userWithMessages = await prisma.user.findUnique({
       where: { email },
       select: {
-        messages: {
+        receivedMessages: {
           select: {
             id: true,
             content: true,
             createdAt: true,
-            user: {
+            sender: {
               select: {
                 username: true,
               },
@@ -53,7 +53,7 @@ export const GET = async (req: NextRequest) => {
       },
     });
 
-    if (!userWithMessages || userWithMessages.messages.length === 0) {
+    if (!userWithMessages || userWithMessages.receivedMessages.length === 0) {
       return NextResponse.json(
         { success: false, message: "No messages found for the user" },
         { status: 404 }
@@ -61,7 +61,11 @@ export const GET = async (req: NextRequest) => {
     }
 
     return NextResponse.json(
-      { success: true, message: userWithMessages.messages, messages: "Messages retrieved successfully." },
+      {
+        success: true,
+        message: userWithMessages.receivedMessages,
+        messages: "Messages retrieved successfully.",
+      },
       { status: 200 }
     );
   } catch (error: any) {
