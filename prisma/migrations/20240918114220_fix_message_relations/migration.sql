@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "Message" ALTER COLUMN "recipientId" DROP DEFAULT,
+ALTER COLUMN "senderId" DROP DEFAULT;

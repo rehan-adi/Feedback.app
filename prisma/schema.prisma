@@ -18,7 +18,8 @@ model User {
   isAcceptingMessages Boolean  @default(true)
   createdAt           DateTime @default(now())
   updatedAt           DateTime @updatedAt
-  messages            Message[]
+  sentMessages        Message[] @relation("SentMessages")
+  receivedMessages    Message[] @relation("ReceivedMessages")
   sessions            Session[]
   githubLink          String?
   twitterLink         String?
@@ -30,8 +31,10 @@ model Message {
   id           String     @id @default(uuid())
   content      String
   createdAt    DateTime   @default(now())
-  userId       String
-  user         User       @relation(fields: [userId], references: [id])
+  senderId     String
+  recipientId  String
+  sender       User       @relation("SentMessages", fields: [senderId], references: [id])
+  recipient    User       @relation("ReceivedMessages", fields: [recipientId], references: [id])
 }
 
 model Session {
