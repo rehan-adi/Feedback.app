@@ -52,14 +52,16 @@ const UsersProfile = () => {
 
   const handleSubmitFeedback = async () => {
     setLoading(true);
+    
     try {
-      const response = await axios.post('/api/message', {
-        recipientId: id, 
-        message: feedback
+      const response = await axios.post(`/api/send-message/${id}`, {
+        content: feedback
       });
-      toast.success("Feedback submitted successfully", { duration: 2000 });
-      setShowTextarea(false);
-      setFeedback('');
+      if (response.status === 201) {
+        toast.success("Feedback submitted successfully", { duration: 2000 });
+        setShowTextarea(false);
+        setFeedback('');
+      }
     } catch (error: any) {
       console.error("Error submitting feedback:", error);
       toast.error("Failed to submit feedback", {
