@@ -40,15 +40,20 @@ export const GET = async (req: NextRequest) => {
       select: {
         messages: {
           select: {
+            id: true,
             content: true,
-            user: true,
             createdAt: true,
+            user: {
+              select: {
+                username: true,
+              },
+            },
           },
         },
       },
     });
 
-    if (!userWithMessages) {
+    if (!userWithMessages || userWithMessages.messages.length === 0) {
       return NextResponse.json(
         { success: false, message: "No messages found for the user" },
         { status: 404 }
@@ -56,7 +61,7 @@ export const GET = async (req: NextRequest) => {
     }
 
     return NextResponse.json(
-      { success: true, message: userWithMessages, messages: "Messages retrieved successfully." },
+      { success: true, message: userWithMessages.messages, messages: "Messages retrieved successfully." },
       { status: 200 }
     );
   } catch (error: any) {
