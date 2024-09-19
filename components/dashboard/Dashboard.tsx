@@ -49,7 +49,7 @@ const Dashboard = () => {
 
   return (
    <div>
-       <div className="dark:bg-black bg-white flex flex-col lg:ml-60 items-center min-h-screen py-10">
+       <div className="dark:bg-black bg-white mt-10 flex flex-col lg:ml-60 items-center min-h-screen py-10">
       {loading ? (
          <div className="w-full mt-16 max-w-3xl space-y-4 px-3">
          {[1, 2, 3].map((_, i) => (
@@ -75,7 +75,7 @@ const Dashboard = () => {
               messages.map((message) => (
                 <div
                   key={message.id}
-                  className="p-5 border dark:border-none rounded-lg shadow-lg bg-[#F4F4F5] dark:bg-[#27272A] border-gray-200"
+                  className="p-5 border dark:border-none rounded-lg lg:shadow-lg shadow-2xl bg-[#F4F4F5] dark:bg-[#27272A] border-gray-200"
                 >
                   <div className="flex justify-between items-center mb-2">
                   <div className="flex items-center gap-2">

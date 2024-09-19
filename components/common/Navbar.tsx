@@ -81,7 +81,7 @@ const Navbar = () => {
         <div>
           <svg
             viewBox="0 0 438.549 438.549"
-            className="h-5 w-5 cursor-pointer"
+            className=" h-6 w-6 cursor-pointer"
             onClick={onGithub}
           >
             <path
