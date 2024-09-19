@@ -73,12 +73,12 @@ const Dashboard = () => {
               messages.map((message) => (
                 <div
                   key={message.id}
-                  className="p-5 border rounded-lg shadow-lg bg-white transition-all duration-200 hover:shadow-2xl dark:bg-black dark:bg-gradient-to-r dark:from-black dark:to-indigo-900 bg-gradient-to-r from-blue-50 to-white border-gray-200 dark:border-white dark:border-opacity-25"
+                  className="p-5 border dark:border-none rounded-lg shadow-lg bg-[#F4F4F5] dark:bg-[#27272A] border-gray-200"
                 >
                   <div className="flex justify-between items-center mb-2">
                   <div className="flex items-center gap-2">
                       <User className="h-5 w-5  dark:text-gray-300" />
-                      <span className="font-semibold text-gray-800 text-base dark:text-gray-100">
+                      <span className="font-semibold text-base dark:text-white">
                         {message.sender.username || "Unknown User"}
                       </span>
                     </div>
@@ -88,7 +88,7 @@ const Dashboard = () => {
                   </div>
                   <div className="flex items-start mt-5 gap-3">
                     <MessageCircle className="h-5 w-5 dark:text-gray-300" />
-                    <p className="text-gray-700 dark:text-gray-300">
+                    <p className="text-[#71717A] dark:text-[#A1A1AA]">
                       {message.content}
                     </p>
                   </div>
