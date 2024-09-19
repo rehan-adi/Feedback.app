@@ -7,6 +7,7 @@ import { Input } from "../ui/input";
 import { Switch } from "../ui/switch";
 import { Button } from "../ui/button";
 import { Loader2 } from "lucide-react";
+import { Lock, Mail } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -126,7 +127,7 @@ const Settings = () => {
         <ul className="flex gap-4">
           <li
             className={`cursor-pointer text-[#9CA3AF] text-sm font-medium ${
-              activeOption === "password" ? "text-white" : ""
+              activeOption === "password" ? "text-black dark:text-white" : ""
             }`}
             onClick={() => setActiveOption("password")}
           >
@@ -134,7 +135,7 @@ const Settings = () => {
           </li>
           <li
             className={`cursor-pointer text-[#9CA3AF] text-sm font-medium ${
-              activeOption === "messages" ? "text-white" : ""
+              activeOption === "messages" ? "text-black dark:text-white" : ""
             }`}
             onClick={() => setActiveOption("messages")}
           >
@@ -144,31 +145,37 @@ const Settings = () => {
       </div>
 
       {/* Sidebar */}
-      <aside className="w-[243px] h-full dark:bg-black bg-white fixed pt-28 left-0 border-r dark:border-white border-black dark:border-opacity-15 border-opacity-25 hidden lg:flex flex-col justify-start p-5">
+      <aside className="w-[243px] h-full dark:bg-black bg-white fixed pt-28 left-0 border-r dark:border-white border-black dark:border-opacity-15 border-opacity-25 hidden lg:flex flex-col justify-start p-4">
         <h2 className="text-2xl font-semibold mb-9">Settings</h2>
 
         <ul className="space-y-4">
           <li
-            className={`cursor-pointer text-[#9CA3AF] text-sm font-medium ${
-              activeOption === "password" ? "dark:text-white text-black" : ""
+            className={`cursor-pointer text-sm font-semibold rounded-lg px-4 py-3 ${
+              activeOption === "password"
+                ? "bg-black text-white dark:bg-[#27272A]"
+                : "text-black hover:bg-[#F4F4F5] dark:text-white dark:hover:bg-[#27272A]"
             }`}
             onClick={() => setActiveOption("password")}
           >
+            <Lock className="w-5 h-5 mr-2 inline-block" />
             Change Password
           </li>
           <li
-            className={`cursor-pointer text-[#9CA3AF] text-sm font-medium ${
-              activeOption === "messages" ? "dark:text-white text-black" : ""
+            className={`cursor-pointer text-sm font-semibold rounded-lg px-4 py-3 ${
+              activeOption === "messages"
+                ? "bg-black text-white dark:bg-[#27272A]"
+                : "text-black hover:bg-[#F4F4F5] dark:text-white dark:hover:bg-[#27272A]"
             }`}
             onClick={() => setActiveOption("messages")}
           >
+            <Mail className="w-5 h-5 mr-2 inline-block" />
             Accept Messages
           </li>
         </ul>
 
         <div className="mt-auto">
           <Button onClick={onLogout} className="w-full" variant="default">
-          {loading ? (
+            {loading ? (
               <>
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" /> log out...
               </>
@@ -180,7 +187,7 @@ const Settings = () => {
       </aside>
 
       {/* Main Content */}
-      <div className="flex-1 flex items-center lg:px-0 px-2 lg:mt-0 mt-2 justify-center">
+      <div className="flex-1 flex items-center lg:px-0 px-2 lg:ml-40 lg:mt-0 mt-2 justify-center">
         <Card className="lg:w-96 w-full dark:bg-black bg-white border dark:border-white border-black dark:border-opacity-15 border-opacity-25 dark:text-white text-black shadow-lg">
           <CardHeader className="text-center text-xl font-bold">
             {activeOption === "" && "Settings Overview"}
