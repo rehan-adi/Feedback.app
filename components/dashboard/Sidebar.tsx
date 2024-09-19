@@ -16,26 +16,26 @@ const Sidebar = () => {
       <div className="p-4">
         <h2 className="text-lg font-medium">{heading}</h2>
         <ul className="mt-6">
-          <li className="mb-2">
+          <li className="mb-2 text-sm font-semibold">
             <Link
               href="/dashboard"
               className={`flex items-center p-2 pr-6 rounded ${
                 isDashboardPage
-                  ? 'bg-slate-100 dark:bg-gray-900'
-                  : 'hover:bg-slate-100 dark:hover:bg-gray-900'
+                  ? 'bg-black text-white dark:bg-[#27272A]'
+                  : 'hover:bg-[#F4F4F5] dark:hover:bg-[#27272A]'
               }`}
             >
               <Home className="w-5 h-5 mr-2" />
               Dashboard
             </Link>
           </li>
-          <li className="mb-2">
+          <li className="mb-2 text-sm font-semibold">
             <Link
               href="/dashboard/users"
               className={`flex items-center p-2 pr-6 rounded ${
                 isUsersPage
-                  ? 'bg-slate-100 dark:bg-gray-900'
-                  : 'hover:bg-slate-100 dark:hover:bg-gray-900'
+                  ? 'bg-black text-white dark:bg-[#27272A]'
+                  : 'hover:bg-[#F4F4F5] dark:hover:bg-[#27272A]'
               }`}
             >
               <User className="w-5 h-5 mr-2" />
