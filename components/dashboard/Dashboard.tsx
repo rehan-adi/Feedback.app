@@ -2,8 +2,9 @@
 
 import axios from "axios";
 import { toast } from "sonner";
+import Footer from "../common/Footer";
 import { useEffect, useState } from "react";
-import { Loader2, User, MessageCircle } from "lucide-react";
+import { User, MessageCircle } from "lucide-react";
 
 
 interface Message {
@@ -47,7 +48,8 @@ const Dashboard = () => {
   }, []);
 
   return (
-    <div className="dark:bg-black bg-white flex flex-col lg:ml-60 items-center min-h-screen py-10">
+   <div>
+       <div className="dark:bg-black bg-white flex flex-col lg:ml-60 items-center min-h-screen py-10">
       {loading ? (
          <div className="w-full mt-16 max-w-3xl space-y-4 px-3">
          {[1, 2, 3].map((_, i) => (
@@ -106,6 +108,10 @@ const Dashboard = () => {
         </div>
       )}
     </div>
+      <div className="lg:ml-60">
+      <Footer />
+      </div>
+   </div>
   );
 };
 
