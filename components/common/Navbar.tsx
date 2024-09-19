@@ -3,9 +3,10 @@
 import axios from "axios";
 import Link from "next/link";
 import { toast } from "sonner";
-import { useRouter } from "next/navigation";
-import { Github, LogOut, Settings, User } from "lucide-react";
 import ThemeToggle from "../ThemeToggle";
+import { useRouter } from "next/navigation";
+import { LogOut, Settings, User, Home } from "lucide-react";
+import { DropdownMenuGroup } from "@radix-ui/react-dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   DropdownMenu,
@@ -16,7 +17,6 @@ import {
   DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { DropdownMenuGroup } from "@radix-ui/react-dropdown-menu";
 
 const Navbar = () => {
   const router = useRouter();
@@ -45,6 +45,10 @@ const Navbar = () => {
   const onProfile = (event: React.MouseEvent<HTMLDivElement>) => {
     event.stopPropagation();
     router.push("/profile");
+  };
+  const onDashboard = (event: React.MouseEvent<HTMLDivElement>) => {
+    event.stopPropagation();
+    router.push("/dashboard");
   };
   const onSettings = (event: React.MouseEvent<HTMLDivElement>) => {
     event.stopPropagation();
@@ -100,6 +104,11 @@ const Navbar = () => {
               <DropdownMenuItem onClick={onProfile}>
                 <User className="mr-2 h-4 w-4" />
                 <span>Profile</span>
+                <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={onDashboard}>
+                <Home className="mr-2 h-4 w-4" />
+                <span>Dashboard</span>
                 <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
               </DropdownMenuItem>
               <DropdownMenuItem onClick={onSettings}>
